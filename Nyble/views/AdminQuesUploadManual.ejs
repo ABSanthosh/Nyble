@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Caveat Brush' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amarante' rel='stylesheet'>
+
+
+    <title>Nyble | Student Portal</title>
+</head>
+
+<style>
+    body{
+        margin: 0px 0px 0px 0px;
+    }
+    .logo{
+        font-size: 80px;
+        width: 100%;
+        text-align: center;
+        font-family: 'Passero One';
+        color: whitesmoke;
+        margin-bottom: 5px;
+        padding-top: 6px;
+    }
+    .sidebar{
+        position: fixed;
+        background-color: #424242;
+        width: 270px;
+        left: 0px;
+        color: white;
+        top: 0px;
+        height: 100%;
+        
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+    nav ul{
+        list-style: none;
+        padding: 0px;
+        font-family: "caveat brush";
+        font-size: 25px;
+        padding-left: 8px;
+        padding-right: 9px;
+        text-align: center;
+        
+    }
+    .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5,.sidebarobj6,.sidebarobj7{
+        border: 5px solid white;
+        line-height: 60px;
+        margin-bottom: 10px;
+    }
+    .sidebarobj5{
+        height: 60px;
+        display: flex;
+    }
+    .sidebarobj1:hover,.sidebarobj2:hover,.sidebarobj7:hover,.sidebarobj5:hover,.sidebarobj6:hover,.sidebarobj6:hover{
+        background-color: cadetblue;
+        cursor: pointer;
+    }
+    .content{
+        height: 100vh;
+    }
+    hr{
+        background-color: white;
+    }  
+    .hr.belowlogo{
+        color: white;
+        border: 2px solid white;
+    }
+    .hr.incontent{
+        background-color: #424242;
+        border: 2px solid #424242;
+    }
+    .contentplacholder{
+        padding-top: 6px;
+        height: 95px;
+    }
+
+    /* Sidebar Styles */
+
+    .logocolor{
+        color: #424242;
+        font-size: 80px;
+        width: 100%;
+        text-align: left;
+        font-family: 'Passero One';
+        margin-bottom: 5px;
+    }
+
+    .sidebar1 {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        background-color: #111;
+        transition: 0.5s;
+        
+        padding-top: 60px;
+        white-space: nowrap;
+    }
+
+    #main .sidebar1 {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+    }
+    #main {
+        margin-left: 271px;
+        transition: margin-left 0.5s;
+    }
+  
+    .sidebarIconToggle {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        z-index: 99;
+        height: 22px;
+        margin: auto;
+        width: 25px;
+    }
+    .spinner {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: absolute;
+        height: 4px;
+        width: 25px;
+        background-color: #fff;
+    }
+    .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    .diagonal.part-1 {
+        position: relative;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        float: left;
+    }
+    .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    input[type="checkbox"]:checked ~ #sidebarMenu {
+        transform: translateX(0);
+    }
+    input[type=checkbox] {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        display: none;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        opacity: 0;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(135deg);
+        margin-top: 8px;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(-135deg);
+        margin-top: -9px;
+    }
+    /* Scroll bar styling */
+    ::-webkit-scrollbar {
+        width: 3.5px;
+        height: 2px;
+    }
+ 
+        /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+        height: 5px;
+        width: 10px;
+    }
+
+    .quesCont{
+        margin: auto;
+        top: 15px;
+        position: relative;
+        width: 75%;
+        border-radius: 4px;
+        overflow-y: auto;
+
+        padding-top: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 30px;
+    }
+    .mainContent{
+        height: 79vh;
+        overflow: auto;
+        margin-bottom: 30px;
+        bottom: 0px;
+    }
+    .option{
+        border: 2px solid #4242429c ;
+        left: 0px;
+        padding-left: 10px;
+        font-size: 1.5rem;
+        right: 0px;
+        width: 100%;
+        border-radius: 4px;
+        outline: none;
+        resize: none;
+    }
+    .question{
+        font-size: 1.3rem;
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: 20px;
+        overflow: auto;
+        border: 2px solid #4242429c ;
+        border-radius: 10px;       
+        width: 100%;
+        font-family: "Walter Turncoat";
+        margin-left: 20px;
+        outline: none;
+        resize: none;
+
+    }
+    .optionsPanel{
+        width: 100%;
+    }
+    .optionBox{
+        position: relative;
+        width: 50%;
+        font-family: "Walter Turncoat";
+        display: inline-flex;
+        margin-bottom: 15px;
+    }
+    .radio{
+        width:3em;
+        height:3em;
+    }
+    input[type=radio]{
+        margin: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .quesPanelFormat{
+        border: 3px solid #424242;
+        padding: 10px 10px 10px 10px;
+        border-radius: 10px;
+        overflow: auto;
+        
+        margin-bottom: 20px;
+    }
+    .baseQuesPanel{
+        border: 3px solid #424242;
+        padding: 10px 10px 10px 10px;
+        border-radius: 10px;
+        overflow: auto;
+        
+        margin-bottom: 20px;
+    }
+    .inputgroup{
+        margin: 10px 0px 10px 0px;
+        padding: 20px 0px 0px 0px;
+        text-align: right;
+        width: 100%;
+        font-family: "Amarante";
+        color: #C4C4C4;
+    }
+    .inputgroup input[type="time"]::-webkit-datetime-edit-ampm-field {
+        display: none;
+    }
+    .inputgroup input[type="number"]{width: 100px;}
+    .inputgroup input{
+        text-align: center;
+        border: 0;
+        outline: 0;
+        border-bottom: 2px solid #424242;
+        font-size: 1.5rem;
+    }
+    .quesnno{
+        display: flex;
+        padding-right: 20px;
+    }
+    .addPanel{
+        background-color: #B4EE86;
+        color: #0b0c10;
+        font-size: 3.5rem;
+        height: 75px; width: 75px;
+        border-radius: 100%;
+        right: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        float: right;
+        cursor: pointer;
+    }
+
+	.addPanel:hover{
+        transform: scale(1.08);
+        transition: all ease-in-out 0.2s
+    }
+
+    .remPanel{
+        background-color: rgb(248, 114, 114);
+        color: #0b0c10;
+        font-size: 1.5rem;
+        height: 30px; width: 30px;
+        border-radius: 100%;
+        font-weight: bolder;
+        right: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        float: right;
+        cursor: pointer;
+    }
+
+	.remPanel:hover{
+        transform: scale(1.08);
+        transition: all ease-in-out 0.2s
+    }
+
+    /* Scroll bar styling */
+    ::-webkit-scrollbar {
+        width: 3.5px;
+        height: 2px;
+    }
+ 
+        /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+        height: 5px;
+        width: 10px;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        
+
+    @media only screen and (max-width: 1030px) { 
+        .spinner{
+            height: 4px;
+            width: 20px;
+            padding: 0%;
+        }
+        .sidebarIconToggle {
+            transition: all 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+            z-index: 99;
+            height: 22px;
+            justify-content: center; 
+            align-items: center;
+            width: 22px;
+        }
+
+        .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5,.sidebarobj6,.sidebarobj7{
+            border: 3px solid white;
+            font-size: 1.35rem;
+            line-height: 35px;
+            margin-bottom: 10px;
+        }
+
+        .sidebarobj5{
+            height: 35px;
+            display: flex;
+        }   
+        #main{
+            margin-left: 56px;
+        }
+        #mySidebar{
+            width: 56px;
+        }
+    }
+    
+</style>
+
+<body>
+    <div class="wrapper d-flex flex-row bd-highlight mb-3">
+        <div class="Mainsidebar sidebar1">
+            <nav class="sidebar" id="mySidebar">
+                <!-- Burger box -->
+                <div id="logoidnb" class="logo">Nyble</div>
+                <hr class="hr belowlogo">
+                <ul>
+                    <div id="sidebarobjid5" class="sidebarobj5" onclick="toggleSidebar()">
+                        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" onclick="toggleSidebar()">
+                        <label class="sidebarIconToggle">
+                            <div class="spinner diagonal part-1"></div>
+                            <div class="spinner horizontal"></div>
+                            <div class="spinner diagonal part-2"></div>
+                        </label>
+                    </div>
+                    <form>
+                        <div id="sidebarobjid1" class="sidebarobj1">Preview</div>
+                    </form>
+                    <form>
+                        <div id="sidebarobjid2" class="sidebarobj2">Time Limit</div>
+                    </form>
+                    <form>
+                        <div id="sidebarobjid3" class="sidebarobj3" style="display: flex; padding-left: 14px;">
+                            Total Marks
+                            <div class="inputgroup" style="padding:0px; margin: auto; margin-left: 10px; margin-right: 15px;">
+                                <input class="Ttime"type="number" placeholder="Marks" style="background-color: #424242; color: white; border-bottom: 2px solid #ffffff; ">
+                            </div>  
+                        </div>
+                    </form>
+                    <form>
+                        <div id="sidebarobjid4" class="sidebarobj4">Same Marks for all : </div>
+                    </form>
+                    <form id="sidebarobjid7form" method="GET" action="/AdminArchive">
+                        <div onclick="Archive()" id="sidebarobjid7" class="sidebarobj7">Archive</div>
+                    </form>
+                    <form id="sidebarobjid6form" method="GET" action="/AdminQuesUploadCSV">
+                        <div onclick="UploadCSV()" id="sidebarobjid6" class="sidebarobj6">Upload .CSV</div>
+                    </form>
+                </ul>
+            </nav>
+        </div> 
+
+        <div class="content" id="main">
+            <div id="logoid" class="contentplacholder logocolor"></div>
+            <hr class="hr incontent">
+            <div class="mainContent">
+                <div class="QpHeader" style="margin: auto; font-size: 3rem; color: #424242; font-family: Petrona; right: 0px;left:0px; text-align: center;">Set Questions</div>
+                <div class="quesCont" id="quesCont">
+
+                    <div class="baseQuesPanel">
+                        <div class="quesnno">
+                            <label style="font-family: 'Amarante';height: 40px; margin: auto; font-size: 2rem; text-align: center;">#1</label>
+                            <textarea class="question" placeholder="Enter Question" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+                        </div>
+                        <div class="optionsPanel">
+                            <div class="optionBox">
+                                <input type="radio" class="radio" id="rOne" name="Answer">
+                                <textarea  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 1</textarea>
+                            </div>
+                            <div class="optionBox">
+                                <input type="radio" class="radio" id="rTwo" name="Answer">
+                                <textarea  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 2</textarea>
+                            </div>
+                            <div class="optionBox">
+                                <input type="radio" class="radio" id="rThree" name="Answer">
+                                <textarea  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 3</textarea>
+                            </div>
+                            <div class="optionBox">
+                                <input type="radio" class="radio" id="rFour" name="Answer">
+                                <textarea  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 4</textarea>
+                            </div>
+                            <div class="inputgroup">
+                                <input type="time">
+                                <input class="Ttime"type="number" placeholder="Marks">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div id="quesPanelFormat" class="quesPanelFormat">
+                        <div class="PanelAdded">
+                            <div class="remPanel" onClick='alert(this.parentNode.parentNode.id)'>&minus;</div>
+                        </div>
+                        <div class="quesnno">
+                            <label style="font-family: 'Amarante';height: 40px; margin: auto; font-size: 2rem; text-align: center;">01</label>
+                            <textarea class="question" placeholder="Enter Question" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+                        </div>
+                        <div class="optionsPanel">
+                            <div class="optionBox">
+                                <input type="radio" class="rOne" id="radio" name="Answer">
+                                <textarea  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 1</textarea>
+                            </div>
+                            <div class="optionBox">
+                                <input type="radio" class="rTwo" id="radio" name="Answer">
+                                <textarea  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 2</textarea>
+                            </div>
+                            <div class="optionBox">
+                                <input type="radio" class="rThree" id="radio" name="Answer">
+                                <textarea  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 3</textarea>
+                            </div>
+                            <div class="optionBox">
+                                <input type="radio" class="rFour" id="radio" name="Answer">
+                                <textarea  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 4</textarea>
+                            </div>
+                            <div class="inputgroup">
+                                <input type="time">
+                                <input class="Ttime"type="number" placeholder="Marks">
+                            </div>
+                        </div>
+                    </div>
+                     -->
+<!--  -->
+                    <div class="PanelAdded">
+                        <div class="addPanel"  onclick="addquesPanel()">&plus;</div>
+                    </div>
+                </div>                        
+            </div>
+        </div>  
+    </div> 
+</body>
+
+<script>
+    function UploadCSV(){
+        document.getElementById("sidebarobjid6form").submit();
+    }  
+    function Archive(){
+        document.getElementById("sidebarobjid7form").submit();
+    }
+    // New question panel adding mechanism
+
+    var startingNo = 1;
+    var idNo=1;
+    var idList={};
+    var tempidList={};
+    var temp=2;
+
+    function removePanel(e){
+        var element = document.getElementById(e);
+        element.remove()
+    }
+
+    function addquesPanel(){
+        startingNo+=1;
+        idNo+=1;
+        var a = "questionNoId"+idNo.toString(),
+            b="questionId"+idNo.toString(),
+            c= "rOne"+idNo.toString(),
+            d="tOne"+idNo.toString(),
+            e="rTwo"+idNo.toString(),
+            f="tTwo"+idNo.toString(),
+            g="rThree"+idNo.toString(),
+            h="tThree"+idNo.toString(),
+            i="rFour"+idNo.toString(),
+            j="tFour"+idNo.toString()
+
+
+        idList[startingNo.toString()] = [];
+        
+        var panelCode=
+        `
+        <div id="quesPanelFormat`+idNo.toString()+`" class="quesPanelFormat">
+            <div class="PanelAdded">
+                <div class="remPanel" id="idOf_`+(idNo).toString()+`" onClick='removePanel((this.parentNode.parentNode.id))'>&minus;</div>
+            </div>
+            <div class="quesnno">
+                <label id="`+a+`" style="font-family: 'Amarante';height: 40px; margin: auto; font-size: 2rem; text-align: center;">#`+(startingNo)+
+            `</label>
+                <textarea id="`+b+`" class="question" placeholder="Enter Question" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+            </div>
+            <div class="optionsPanel">
+                <div class="optionBox">
+                    <input type="radio" class="radio " id="`+c+`" name="Answer">
+                    <textarea id="`+d+`" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 1</textarea>
+                </div>
+                <div class="optionBox">
+                    <input type="radio" class="radio" id="`+e+`" name="Answer">
+                    <textarea id="`+f+`" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 2</textarea>
+                </div>
+                <div class="optionBox">
+                    <input type="radio" class="radio" id="`+g+`" name="Answer">
+                    <textarea id="`+h+`" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 3</textarea>
+                </div>
+                <div class="optionBox">
+                    <input type="radio" class="radio" id="`+i+`" name="Answer">
+                    <textarea id="`+j+`" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="option">Option 4</textarea>
+                </div>
+                <div class="inputgroup">
+                    <input type="time">
+                    <input class="Ttime"type="number" placeholder="Marks">
+                </div>
+            </div>
+        </div>
+        `
+        
+        var div = document.createElement('div');
+        var adderPlus = document.querySelector(".PanelAdded");
+        var mC = document.querySelector(".quesCont");
+        div.innerHTML = panelCode;
+
+        var parentnode = document.querySelector(".quesCont");
+        parentnode.insertBefore(div,mC.childNodes[mC.childNodes.length-2]);
+        
+        
+        var qCont = document.querySelector(".mainContent");
+        qCont.style.scrollBehavior = "smooth";
+        qCont.scrollTop = qCont.scrollHeight;
+    }
+
+
+
+    function widthchanged(mq){
+        if (mq.matches) {
+            mini = true;
+            toggleSidebar();
+        } else {
+            mini = false;
+            toggleSidebar();
+    } }   
+
+    const mq = window.matchMedia( "(min-width: 1030px)" ); 
+
+    widthchanged(mq);
+    mq.addListener(widthchanged);
+
+    function toggleSidebar() {
+        if (mini) {
+            document.getElementById("mySidebar").style.width = "271px";
+            document.getElementById("main").style.marginLeft = "271px";
+
+            document.getElementById("sidebarobjid1").innerHTML = "Preview";
+            document.getElementById("sidebarobjid2").innerHTML = "Time Limit";
+            document.getElementById("sidebarobjid3").innerHTML = "Total Marks";
+            document.getElementById("sidebarobjid4").innerHTML = "Same Marks for all : ";
+            document.getElementById("sidebarobjid7").innerHTML = "Archive";
+            document.getElementById("sidebarobjid6").innerHTML = "Upload .CSV";
+            
+
+            document.getElementById("logoid").classList.remove("logo");
+            document.getElementById("logoid").innerHTML ="";
+            document.getElementById("logoidnb").classList.remove("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="Nyble";
+
+            this.mini = false;
+        } else {
+            if(mq.matches){
+                document.getElementById("mySidebar").style.width = "90px";
+                document.getElementById("main").style.marginLeft = "90px";
+            }else{
+                document.getElementById("mySidebar").style.width = "56px";
+                document.getElementById("main").style.marginLeft = "56px";
+            }
+            document.getElementById("sidebarobjid1").innerHTML = "Pre.";
+            document.getElementById("sidebarobjid2").innerHTML = "T.L";
+            document.getElementById("sidebarobjid3").innerHTML = "T.M";
+            document.getElementById("sidebarobjid4").innerHTML = "M.";
+            document.getElementById("sidebarobjid7").innerHTML = "Arc.";
+            document.getElementById("sidebarobjid6").innerHTML = ".CSV";
+            
+
+            document.getElementById("logoid").classList.add("logo");
+            document.getElementById("logoid").innerHTML ="Nyble";
+            document.getElementById("logoidnb").classList.add("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="";
+            this.mini = true;
+        }
+    }
+</script>
+
+</html>

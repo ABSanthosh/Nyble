@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Walter Turncoat' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Caveat Brush' rel='stylesheet'><link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    
+    <title>Nyble | Quiz</title>
+</head>
+
+<style >
+    body{
+        background: url(https://subtlepatterns.com/patterns/symphony.png);
+        margin: 0px 0px 0px 0px;   
+    }
+    .logo{
+        font-size: 80px;
+        width: 100%;
+        text-align: center;
+        font-family: 'Passero One';
+        color: whitesmoke;
+        margin-bottom: 5px;
+        padding-top: 6px;
+    }
+    .sidebar{
+        position: fixed;
+        background-color: #424242;
+        width: 270px;
+        left: 0px;
+        color: white;
+        top: 0px;
+        height: 100%;
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+    nav #other_menus{
+        list-style: none;
+        padding: 0px;
+        font-family: "caveat brush";
+        font-size: 25px;
+        padding-left: 8px;
+        position: relative;
+        padding-right: 9px;
+        text-align: center;
+        
+    }
+    .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5,.sidebarobj6,.sidebarobj7{
+        border: 5px solid white;
+        line-height: 60px;
+        margin-bottom: 10px;
+    }
+    .sidebarobj5{
+        height: 60px;
+        display: flex;
+    }
+    .sidebarobj4:hover,.sidebarobj5:hover,.sidebarobj6:hover,.sidebarobj6:hover{
+        background-color: cadetblue;
+        cursor: pointer;
+    }
+
+    .hr{
+        background-color: white ;
+
+    }  
+    .hr.belowlogo{
+        color: white;
+        border: 2px solid white;
+    }
+    .hr.incontent{
+        background-color: #424242;
+        border: 2px solid #424242;
+    }
+    .contentplacholder{
+        padding-top: 6px;
+        height: 95px;
+    }
+
+    /* Sidebar Styles */
+
+    .logocolor{
+        color: #424242;
+        font-size: 80px;
+        width: 100%;
+        text-align: left;
+        font-family: 'Passero One';
+        margin-bottom: 5px;
+    }
+
+    .sidebar1 {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        background-color: #111;
+        transition: 0.5s;
+        
+        padding-top: 60px;
+        white-space: nowrap;
+    }
+
+    #main .sidebar1 {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+    }
+    #main {
+        margin-left: 271px;
+        transition: margin-left 0.5s;
+        overflow: hidden;
+    }
+  
+    .sidebarIconToggle {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        z-index: 99;
+        height: 22px;
+        margin: auto;
+        width: 25px;
+    }
+    .spinner {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: absolute;
+        height: 4px;
+        width: 25px;
+        background-color: #fff;
+    }
+    .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    .diagonal.part-1 {
+        position: relative;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        float: left;
+    }
+    .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    input[type="checkbox"]:checked ~ #sidebarMenu {
+        transform: translateX(0);
+    }
+    input[type=checkbox] {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        display: none;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        opacity: 0;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(135deg);
+        margin-top: 8px;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(-135deg);
+        margin-top: -9px;
+    }
+    #starttest{
+        bottom: 0px;
+        list-style: none;
+        padding: 0px;
+        font-family: "caveat brush";
+        font-size: 25px;
+        position: absolute;
+        padding-left: 8px;
+        padding-right: 9px;
+        text-align: center;
+        right: 0px;
+        left: 0px;
+    }
+    @media only screen and (max-width: 1030px) { 
+        .spinner{
+            height: 4px;
+            width: 20px;
+            padding: 0%;
+        }
+        .sidebarIconToggle {
+            transition: all 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+            z-index: 99;
+            height: 22px;
+            justify-content: center; 
+            align-items: center;
+            width: 22px;
+        }
+
+        .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5,.sidebarobj6,.sidebarobj7{
+            border: 3px solid white;
+            font-size: 1.35rem;
+            line-height: 35px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+
+        .sidebarobj5{
+            height: 35px;
+            display: flex;
+        }   
+        #main{
+            margin-left: 56px;
+        }
+        #mySidebar{
+            width: 56px;
+        }
+        .optionBox{
+            transition: ease-in-out 0.3s;
+            width: 100% !important;
+        }
+        .quesSelPanel{
+            height: 15% !important;
+        }
+        .quesPanel{
+            height: 80% !important;
+        }
+        /*==============================================================================*/
+        #main{
+            overflow: hidden;
+        }
+        .quesFunction{
+            flex-wrap: wrap !important;
+            padding-right: 20px ;
+            height: 65% !important;
+        }
+        .qFunc{
+            margin-left: -20px !important;
+            margin-right: -20px !important;
+            width: -webkit-fill-available !important;
+            font-size: 1.2rem !important;
+        }
+        .mainContent{
+            height: 80vh !important;
+        }
+      
+    }
+    /* Scroll bar styling */
+    ::-webkit-scrollbar {
+        width: 3.5px;
+        height: 2px;
+    }
+ 
+        /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+        height: 5px;
+        width: 10px;
+    }
+    /* Main Content stylings */
+    .content{
+        height: 100vh;
+        position: relative;
+        overflow: auto;        
+    }
+    .quesPanel{
+        margin: auto;
+        top: 15px;
+        height: 50%;
+        position: relative;
+        width: 75%;
+        border: 4px solid rgb(37, 37, 37);
+        border-radius: 4px;
+        overflow-y: auto;
+        background-color: white;
+
+        padding-top: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .question{
+        width: 100%;
+        font-size: 1.3rem;
+        margin-top: 1rem;
+        margin-bottom: 15px;
+        font-family: "Walter Turncoat";
+    }
+    .optionsPanel{
+        width: 100%;
+    }
+    .optionBox{
+        position: relative;
+        width: 50%;
+        font-family: "Walter Turncoat";
+        display: inline-flex;
+        margin-bottom: 15px;
+    }
+    .form-control{
+        font-size: 1.25rem;
+    }
+    .option{
+        border: 2px solid #4242429c ;
+        left: 0px;
+        padding-left: 10px;
+        font-size: 1.5rem;
+        right: 0px;
+        width: 100%;
+        border-radius: 4px;
+    }
+    
+
+    .quesSelPanel{
+        margin: auto;
+        margin-top: 20px;
+        position: relative;
+        width: 76%;
+        height: 11%;
+        overflow-y: hidden;
+        display: flex;
+        
+        top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .quesFunction{
+        margin: auto;
+        margin-top: 20px;
+        position: relative;
+        width: 77%;
+        height: 11%;
+        display: flex;
+        top: 10px;
+        padding-left: 20px;
+    }
+    
+    .quesNo{
+        border: 5px solid #424242;
+        height: 55px;
+        margin-bottom: 10px;
+        margin-right: 28px;
+        margin-left: -18px;
+        font-family: "caveat brush";
+        font-size: 40px;
+        text-align: center;
+        padding: 0px 15px 0px 15px;
+        cursor: pointer;
+    }
+    .quesNo:hover{
+        background-color: cadetblue;
+    }
+    .rOne,.rTwo,.rThree,.rFour{
+        width:3em;
+        height:3em;
+    }
+    input[type=radio]{
+        margin: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .mainContent{
+        height: 100vh;
+        overflow: auto;
+        margin-bottom: 30px;
+        bottom: 0px;
+    }
+
+    .qFunc{
+        border: 5px solid #424242;
+        line-height: 60px;
+        margin-bottom: 10px;
+
+        font-family: "walter turncoat";
+        width: 100%;
+        text-align: center;
+        
+    }
+    .Func3{
+        margin-left: -18px;
+        margin-right: 30px;
+    }
+    .Func1:hover{
+        background-color: darkslateblue;
+        color: whitesmoke;
+    }
+    .Func2:hover {
+        background-color:#9492F2 ;
+        color: whitesmoke;
+    }
+    .Func3:hover{
+        cursor: pointer;
+        background-color: tomato;
+    }
+    .Func4:hover{
+        cursor: pointer;
+        background-color: lightgreen;
+    }
+    .Func1{
+        padding: 0px 5px 0px 5px;
+        font-size: 1.35rem;
+    }
+    .Func2{
+        font-size: 1rem;
+    }
+    .Func3,.Func4{
+        font-size: 1.6rem;
+    }
+    .currentQuestion{
+        background-color:cornsilk
+    }
+    .savedQuestion{
+        background-color: lightgreen;
+    }
+    .skipedQuestion{
+        background-color: tomato;
+    }
+    .reviewQuestions{
+        background-color:#9492F2 ;
+    }
+    #mydiv {
+    position: absolute;
+    z-index: 9;
+    background-color: #f1f1f1;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+    }
+
+    #mydivheader {
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;
+    }
+
+    #calculator {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        width: 300px;
+        max-width: 100%;
+        background: white;
+        margin: 0 auto;
+    }
+
+    #calculator .screen {
+        min-height: 150px;
+        background: white;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 10;
+        padding: 15px;
+    }
+
+    #calculator .screen p {
+        margin: 0;
+        text-align: right;
+        word-break: break-all;
+    }
+
+    #calculator .screen p#history {
+        color: #a3adb6;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    #calculator .screen p#history span {
+        margin: 0 5px;
+        color: #4fcbcc;
+        font-weight: 700;
+    }
+
+    #calculator .screen p#current {
+        color: #2c4053;
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    #calculator .buttons {
+        overflow: hidden;
+    }
+
+    #calculator .buttons button {
+        width: 25%;
+        height: 60px;
+        margin: 0;
+        float: left;
+        border-top: 1px solid #ececec;
+        border-left: 1px solid #ececec;
+        border-bottom: transparent;
+        border-right: transparent;
+        color: #2c4053;
+        font-family: Roboto;
+        font-size: 18px;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    #calculator .buttons button:hover,
+    #calculator .buttons button.down,
+    #calculator .buttons button:active,
+    #calculator .buttons button:focus {
+        background: #e6e6e6;
+        outline: none;
+    }
+
+    #calculator .buttons button.double {
+        width: 50%;
+    }
+
+    #calculator .buttons button.grey {
+        background: #f4f9ff;
+    }
+
+    #calculator .buttons button.grey:hover,
+    #calculator .buttons button.grey.down,
+    #calculator .buttons button.grey:active,
+    #calculator .buttons button.grey:focus {
+        background: #c1ddff;
+    }
+
+    #calculator .buttons button.blue {
+        background: #2c4053;
+        color: #ffffff;
+    }
+
+    #calculator .buttons button.blue:hover,
+    #calculator .buttons button.blue.down,
+    #calculator .buttons button.blue:active,
+    #calculator .buttons button.blue:focus {
+        background: #1a2632;
+    }
+
+    #calculator .buttons button.green {
+        background: #4fcbcc;
+        color: #ffffff;
+    }
+
+    #calculator .buttons button.green:hover,
+    #calculator .buttons button.green.down,
+    #calculator .buttons button.green:active,
+    #calculator .buttons button.green:focus {
+        background: #34b3b4;
+    }
+    *:fullscreen
+    *:-ms-fullscreen,
+    *:-webkit-full-screen,
+    *:-moz-full-screen {
+    overflow: auto !important;
+    }
+
+</style>
+
+<body>
+    <div class="wrapper d-flex flex-row bd-highlight mb-3">
+        <div class="Mainsidebar sidebar1">
+            <nav class="sidebar" id="mySidebar">
+                <!-- Burger box -->
+                <div id="logoidnb" class="logo">Nyble</div>
+                <hr class="hr belowlogo">
+                <ul id="other_menus">
+                    <div id="sidebarobjid5" class="sidebarobj5" onclick="toggleSidebar()">
+                        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" onclick="toggleSidebar()">
+                        <label class="sidebarIconToggle">
+                            <div class="spinner diagonal part-1"></div>
+                            <div class="spinner horizontal"></div>
+                            <div class="spinner diagonal part-2"></div>
+                        </label>
+                    </div>    
+                    <div id="sidebarobjid1" class="sidebarobj1">Time</div>
+                    <div id="sidebarobjid2" class="sidebarobj2">No. Of Questions<br>##</div>
+                    <div id="sidebarobjid3" class="sidebarobj3">
+                        <label>Marking Scheme</label>
+                        <div style="display: flex; height: 35px;">
+                            <div style="margin: auto; margin-bottom: 10px; width: 80px; line-height: 25px; background-color: yellowgreen; color: #424242;">hello</div>
+                            <div style="margin: auto; margin-bottom: 10px; width: 80px; line-height: 25px; background-color: rgb(255, 97, 97); color: #424242;">there</div>
+                        </div>
+                    </div>
+                    <div id="sidebarobjid6" onclick="showCalc()" class="sidebarobj6">Calculator</div>
+                    <div id="sidebarobjid7" class="sidebarobj7">&lt; ExamName &gt;</div>
+                </ul>
+                <ul id="starttest">
+                    <form id="sidebarobjid4form" method="POST" action="/StudentPortalExam/submit">
+                        <div onclick="submitTest('')" id="sidebarobjid4" class="sidebarobj4">Submit Test</div>
+                    </form>
+                </ul>
+            </nav>
+        </div> 
+
+        <div class="content" id="main">
+            <div id="logoid" class="contentplacholder logocolor"></div>
+            <hr class="hr incontent">
+            <div class="mainContent">
+                <div id="mydiv">
+                    <div style="display: none;" id="mydivheader">                        
+                        <div id="calculator">
+                            <div class="screen">
+                                <p id="history"></p>
+                                <p id="current">0</p>
+                            </div>
+                            <div class="buttons">
+                                    <button value="clearall" class="grey">C</button>
+                                    <button value="clearentry" class="grey">CE</button>
+                                    <button value="Backspace" class="grey">&#8592;</button>
+                                    <button value="/" class="blue">/</button>
+                                
+                                    <button value="7">7</button>
+                                    <button value="8">8</button>
+                                    <button value="9">9</button>
+                                    <button value="*" class="blue">*</button>
+                                
+                                    <button value="4">4</button>
+                                    <button value="5">5</button>
+                                    <button value="6">6</button>
+                                    <button value="+" class="blue">+</button>
+                                
+                                    <button value="1">1</button>
+                                    <button value="2">2</button>
+                                    <button value="3">3</button>
+                                    <button value="-" class="blue">-</button>
+                                
+                                    <button value="0" class="double">0</button>
+                                    <button value=".">.</button>
+                                    <button value="Enter" class="green">=</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="quesPanel" id="quesPanel">
+                    <div id="question" class="question">Question</div>
+                    <div class="optionsPanel">
+                        <div class="optionBox">
+                            <input onchange="addAnswer(document.getElementById('question').innerText,1)" type="radio" class="rOne" value="1" id="radio1" name="Answer">
+                            <div id="option1" class="option">Option 1</div>
+                        </div>
+                        <div class="optionBox">
+                            <input onchange="addAnswer(document.getElementById('question').innerText,2)" type="radio" class="rTwo" value="2" id="radio2" name="Answer">
+                            <div id="option2" class="option">Option 2</div>
+                        </div>
+                        <div class="optionBox">
+                            <input onchange="addAnswer(document.getElementById('question').innerText,3)" type="radio" class="rThree" value="3" id="radio3" name="Answer">
+                            <div id="option3" class="option">Option 3</div>
+                        </div>
+                        <div class="optionBox">
+                            <input onchange="addAnswer(document.getElementById('question').innerText,4)" type="radio" class="rFour" value="4" id="radio4" name="Answer">
+                            <div id="option4" class="option">Option 4</div>
+                        </div>
+                        
+                    </div>         
+                </div>
+                <div class="quesSelPanel"> 
+                    <% var archiveDetails = noOfQuestion; %> 
+                    <% for(i=1;i<archiveDetails; i++){ %>
+                        <div class="quesNo" onclick="showQues('<%= i-1 %>')" data-qno='<%= i-1 %>'> <%= (i.toString() < 10 ? '0' : '') + i.toString() %> </div>
+                    <% } %>
+                    <div class="quesNo" onclick="showQues('<%= i-1 %>')" data-qno='<%= i-1 %>'> <%= (i.toString() < 10 ? '0' : '') + i.toString() %> </div>
+                </div>
+                <div class="quesFunction">
+                    <div class="qFunc Func3" onclick="showQues(parseInt((document.getElementById('question').innerText).slice(0,2))-2)">Previous</div>
+                    <div class="qFunc Func4" onclick="showQues(parseInt((document.getElementById('question').innerText).slice(0,2)))">Next</div>
+                </div>
+            </div>
+        </div>
+        </div>  
+    </div> 
+    <% var numberOfquestions = noOfQuestion; %> 
+    <% var Quiztime = quiztime; %>
+    <% var SubjectName = subjectName; %>
+</body>
+
+<script>
+    $(window).focus(function() {
+        console.log("Bitch you provoked your quiz rights!")
+    });
+
+    $(window).blur(function() {
+        submitTest("provoked!")
+    });
+    function showCalc(){
+        if(document.getElementById("mydivheader").style.display =="none"){document.getElementById("mydivheader").style.display = "block"}
+        else{document.getElementById("mydivheader").style.display = "none"}
+    }
+    var getnumberOfquestions = "<%= numberOfquestions  %>";
+    var getQuiztime = "<%= Quiztime  %>";
+    var getSubjectName = "<%= SubjectName  %>";
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        var tictocmf = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            document.getElementById("sidebarobjid1").textContent
+            if(display.textContent != "00:00"){
+                display.textContent = minutes + ":" + seconds
+                document.getElementById("time").textContent = minutes + ":" + seconds
+            }
+            if (timer-- <= -1) {
+                alert("Quiz is over. It will be automatically saved in the database")
+                clearInterval(tictocmf)
+                submitTest("")
+            }
+        }, 1000)
+    }
+    
+    function submitTest(provoke){
+        if(provoke=="provoked!"){alert("Looks like you changed your quiz tab. Your quiz is automatically submitted because of suspicious activity.")}
+        else if(provoke!=''){alert("Your responses will be saved to the database. Now, you will be redirected to the main page...")}
+        document.getElementById("sidebarobjid4form").submit()
+    }
+    var questionNumber = "<%= archiveDetails  %>";
+    var answerArray={}
+    for(i=0;i<questionNumber;i++){
+        answerArray["Answer"+(parseInt(i)+1).toString()]=null
+    }
+    var formData = new FormData()
+    formData.append("Answers",[])
+    showQues(0)
+
+    var positiveMark = "";
+    var negativeMark = "";
+
+    function showQues(clickedQno){
+        if(clickedQno>questionNumber-1){clickedQno-=1}
+        if(clickedQno<0){clickedQno+=1}
+        if(formData.has("QuestionNo")){formData.delete("QuestionNo")}
+        formData.append("QuestionNo",clickedQno)
+
+        $.ajax({
+                url : '/StudentPortalExam/gQuestion',
+                type : 'POST',
+                data : formData,
+                processData: false,  
+                contentType: false,  
+                success : function(data) {
+                    
+                    document.getElementById("question").innerText = ((parseInt(clickedQno)+1).toString() < 10 ? '0' : '') + (parseInt(clickedQno)+1).toString() +") "+data[0].question
+                    document.getElementById("option1").innerText = data[0].options[0].option1
+                    document.getElementById("option2").innerText = data[0].options[0].option2
+                    document.getElementById("option3").innerText = data[0].options[0].option3
+                    document.getElementById("option4").innerText = data[0].options[0].option4
+                    
+                    positiveMark = data[2]
+                    negativeMark = data[3]
+
+                    document.getElementById("positivemarkdiv").innerText = data[2]
+                    document.getElementById("negativemarkdiv").innerText = data[3]
+
+                    var r1 =document.getElementById("radio1")
+                    r1.setAttribute("name","Answer"+(parseInt(clickedQno)+1).toString())
+                    var r2 =document.getElementById("radio2")
+                    r2.setAttribute("name","Answer"+(parseInt(clickedQno)+1).toString())
+                    var r3 =document.getElementById("radio3")
+                    r3.setAttribute("name","Answer"+(parseInt(clickedQno)+1).toString())
+                    var r4 =document.getElementById("radio4")
+                    r4.setAttribute("name","Answer"+(parseInt(clickedQno)+1).toString())
+                    var pos=0
+                    var g = [r1,r2,r3,r4,"p"]
+
+                    g.forEach(obj=>{
+                        if(obj.checked){
+                            obj.checked=false
+                        }
+                        if(!document.getElementsByClassName("quesNo")[clickedQno].classList.contains("savedQuestion")){
+                                document.getElementsByClassName("quesNo")[clickedQno].classList.add("skipedQuestion")
+                        }
+                    })
+                    if(answerArray["Answer"+(parseInt(clickedQno)+1).toString()]!=null){
+                        var val = answerArray["Answer"+(parseInt(clickedQno)+1).toString()]
+                        if(val == "1"){r1.checked=true}
+                        else if(val == "2"){r2.checked=true}
+                        else if(val == "3"){r3.checked=true}
+                        else if(val == "4"){r4.checked=true}
+                        else{}
+                    }
+                    formData.set("Answers",JSON.stringify(answerArray))
+                    $.ajax({
+                        url : '/StudentPortalExam/gQuestion',
+                        type : 'POST',
+                        data : formData,
+                        processData: false,  
+                        contentType: false,
+                        success:function(data2){
+                        }
+                    })
+                },
+                error:function(err){}
+        });
+    }
+
+    function addAnswer(ques,optionSelec){
+        clickedQno = parseInt(ques.slice(0,2))
+        var r1 =document.getElementById("radio1")
+        r1.setAttribute("name","Answer"+(parseInt(clickedQno)+1).toString())
+        var r2 =document.getElementById("radio2")
+        r2.setAttribute("name","Answer"+(parseInt(clickedQno)+1).toString())
+        var r3 =document.getElementById("radio3")
+        r3.setAttribute("name","Answer"+(parseInt(clickedQno)+1).toString())
+        var r4 =document.getElementById("radio4")
+        r4.setAttribute("name","Answer"+(parseInt(clickedQno)+1).toString())
+        var g = [r1,r2,r3,r4,"p"]
+
+        g.forEach(obj=>{
+            if(obj.checked){
+                answerArray["Answer"+(parseInt(clickedQno)).toString()] = obj.value
+                if(document.getElementsByClassName("quesNo")[clickedQno-1].classList.contains("skipedQuestion")){
+                    document.getElementsByClassName("quesNo")[clickedQno-1].classList.remove("skipedQuestion")
+                }
+                document.getElementsByClassName("quesNo")[clickedQno-1].classList.add("savedQuestion")
+            }
+        })
+        formData.set("Answers",JSON.stringify(answerArray))
+        $.ajax({
+            url : '/StudentPortalExam/gQuestion',
+            type : 'POST',
+            data : formData,
+            processData: false,  
+            contentType: false,
+            success:function(data2){
+            }
+        })
+    }
+
+    // Horizontal scroll for quesNo panel
+    var $hs = $('.quesSelPanel');
+    var $sLeft = 0;
+    var $hsw = $hs.outerWidth(true);
+
+    $( window ).resize(function() {$hsw = $hs.outerWidth(true);});
+    function scrollMap($sLeft) {$hs.scrollLeft($sLeft);}
+
+    $hs.on('mousewheel', function(e) {
+        var $max = $hsw * 2 + (-e.originalEvent.wheelDeltaY);
+        if ($sLeft > -1 && $sLeft<=$max){$sLeft = $sLeft + (-e.originalEvent.wheelDeltaY);} 
+        else {$sLeft = 0;}
+        if ($sLeft > $max) {$sLeft = $max;}
+        
+        if(($sLeft > 0) && ($sLeft < $max)) {
+            e.preventDefault();
+            e.stopPropagation(); 
+        }
+        scrollMap($sLeft);
+    });
+    ///////////////////////////////////////////////////////////////////////////////////
+    
+    function widthchanged(mq){
+        if (mq.matches) {
+    // window width is at least 500px
+        mini = true;
+        toggleSidebar();
+    } else {
+    // window width is less than 500px
+        mini = false;
+        toggleSidebar();
+    } }   
+
+    // var mini = false;
+    const mq = window.matchMedia( "(min-width: 1030px)" ); 
+    var xx=10;
+    var yy=10;
+    var examName = getSubjectName;
+
+
+
+    
+    var noOfQues=getnumberOfquestions
+    
+    window.onload = function () {
+        var fiveMinutes = 60 * parseInt(getQuiztime)
+        var display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+        
+    };
+    
+    widthchanged(mq);
+    mq.addListener(widthchanged);
+
+    function toggleSidebar() {
+        if (mini) {
+            document.getElementById("mySidebar").style.width = "271px";
+            document.getElementById("mySidebar").style.minHeight="600px"
+            document.getElementById("main").style.marginLeft = "271px";
+
+            document.getElementById("sidebarobjid1").innerHTML = "Time: <span id='time'></span> Min";
+            document.getElementById("sidebarobjid2").innerHTML = "No. Of Questions: "+noOfQues ;
+            document.getElementById("sidebarobjid3").innerHTML = `
+            <label>Marking Scheme</label>
+            <div style="display: flex; height: 35px;">
+                <div id="positivemarkdiv" style="margin: auto; margin-bottom: 10px; width: 80px; line-height: 25px; background-color: yellowgreen; color: #424242;">`+positiveMark+`</div>
+                <div id="negativemarkdiv" style="margin: auto; margin-bottom: 10px; width: 80px; line-height: 25px; background-color: rgb(255, 97, 97); color: #424242;">`+negativeMark+`</div>
+            </div>`;
+            document.getElementById("sidebarobjid4").innerHTML = "Submit Test";
+            document.getElementById("sidebarobjid6").innerHTML = "Calculator";
+            document.getElementById("sidebarobjid7").innerHTML = examName;
+
+            document.getElementById("sidebarobjid1").style.fontSize ="1.35rem";
+
+            document.getElementById("logoid").classList.remove("logo");
+            document.getElementById("logoid").innerHTML ="";
+            document.getElementById("logoidnb").classList.remove("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="Nyble";
+
+            this.mini = false;
+        } else {
+            if(mq.matches){
+                document.getElementById("mySidebar").style.width = "90px";
+                document.getElementById("main").style.marginLeft = "90px";
+            }else{
+                document.getElementById("mySidebar").style.width = "56px";
+                document.getElementById("main").style.marginLeft = "56px";
+                document.getElementById("sidebarobjid1").style.fontSize ="1rem";
+
+            }
+            // document.getElementById("quesFunction").style.height=null;
+            document.getElementById("mySidebar").style.minHeight="420px";
+            
+            document.getElementById("sidebarobjid1").innerHTML = "&#8203;<span id='time'></span>"
+            document.getElementById("sidebarobjid2").innerHTML = "Q. "+noOfQues;
+            document.getElementById("sidebarobjid3").innerHTML = "M.S";
+            document.getElementById("sidebarobjid4").innerHTML = "Sb.T";
+            document.getElementById("sidebarobjid6").innerHTML = "Calc.";
+            document.getElementById("sidebarobjid7").innerHTML = "Exm.";
+
+            document.getElementById("logoid").classList.add("logo");
+            document.getElementById("logoid").innerHTML ="Nyble";
+            document.getElementById("logoidnb").classList.add("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="";
+            this.mini = true;
+        }
+    }
+
+    dragElement(document.getElementById("mydiv"));
+
+    function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "header")) {
+        // if present, the header is where you move the DIV from:
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+    } else {
+        // otherwise, move the DIV from anywhere inside the DIV:
+        elmnt.onmousedown = dragMouseDown;
+    }
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        // stop moving when mouse button is released:
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+    }
+// --------------------------------------------------------------------------------------------------->
+        //Instanciate variables
+    var historic = '';
+    var current = '0';
+    var answer = 0;
+    var remind;
+
+    //Handle clicks and keyboard events
+    $(document).ready(function() {
+        $(document).keydown(function(evt) {
+            var code = evt.key;
+            if ($(':focus').is('button')) {
+                evt.preventDefault();
+            }
+            $('button[value="' + code + '"]').addClass('down');
+            setTimeout(function() {
+                $('button[value="' + code + '"]').removeClass('down');
+            }, 300);
+            handleValue(code);
+        });
+        $('button').click(function(evt) {
+            var code = $(this).attr("value");
+            handleValue(code);
+        });
+    });
+
+    function handleValue(entry) {
+        //Hide error notification if it appeared earlier
+        $('header').slideUp();
+
+        //Store result from past calculation in historic
+        if (remind) {
+            historic = current;
+            remind = false;
+        }
+        //Clear all entries
+        if (entry === 'clearall') {
+            resetCalc(true, true);
+        }
+        //Clear the current entry
+        if (entry === 'clearentry') {
+            resetCalc(true, false);
+            answer = 0;
+        }
+        //Handle deletion of characters
+        if (entry === 'Backspace') {
+            if (current !== '' && current !== '0' && answer === 0) {
+                current = current.slice(0, -1);
+                historic = historic.slice(0, -1);
+                addText();
+            } else {
+                displayError("There is nothing left to remove.");
+            }
+        }
+
+        //Handle operators
+        if (entry === '/' || entry === '*' || entry === '+' || entry === '-') {
+            if (current === '0' || current === '') {
+                displayError("You can't operate on nothing.");
+            } else {
+                current = entry;
+                historic += entry;
+                addText();
+                answer = 0;
+                current = '';
+            }
+        }
+
+        //Hande Enter/Validation
+        if (entry === 'Enter') {
+            calculate();
+            remind = true;
+        }
+
+        //Handle Decimals
+        if (entry === '.') {
+            if (current.indexOf('.') === -1) {
+                if (answer !== 0) {
+                    resetCalc(true, true);
+                }
+                if (current === '') {
+                    current = '0' + entry;
+                    historic += current;
+                } else {
+                    if (historic === '')
+                        historic += '0' + entry;
+                    else
+                        historic += entry;
+                    current += entry;
+                }
+                addText();
+            } else {
+                displayError("You can't have more than one decimal in a number.");
+            }
+        }
+
+        //Handle numbers
+        if (!isNaN(entry)) {
+            if (answer !== 0) {
+                resetCalc(true, true);
+            }
+            if (current === '0' && historic === '') {
+                current = entry;
+                historic = entry;
+            } else {
+                if (current === '0') {
+                    current = entry;
+                } else {
+                    current += entry;
+                }
+                historic += entry;
+            }
+            addText();
+            answer = 0;
+        }
+    }
+
+    //Add text to the calculator
+    function addText() {
+        $('#current').html(current);
+        $('#history').html(historic);
+    }
+
+    //Reset the calculator partially or not
+    function resetCalc(current_res, history_res) {
+        if (current_res) {
+            current = '0';
+            $('#current').html(current);
+        }
+        if (history_res) {
+            historic = '';
+            $('#history').html(historic);
+            answer = 0;
+        } else {
+            var test = historic.split(/([\/\*\+\-])/g);
+            if (!isNaN(test[test.length - 1])) {
+                test.pop();
+                historic = test.join('');
+            }
+            $('#history').html(historic);
+        }
+    }
+
+    //Calculate the result
+    function calculate() {
+        answer = eval(historic);
+        current = answer.toString();
+        addText();
+    }
+
+    //Display errors
+    function displayError(string) {
+        $('header').slideDown();
+        $('.error').text(string);
+    }
+</script>
+
+</html>

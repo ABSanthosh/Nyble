@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Caveat Brush' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Petrona' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <title>Nyble | Admin Archives</title>
+</head>
+
+<style>
+    body{
+        background: url(https://subtlepatterns.com/patterns/symphony.png);
+        margin: 0px 0px 0px 0px;
+    }
+    .logo{
+        font-size: 80px;
+        width: 100%;
+        text-align: center;
+        font-family: 'Passero One';
+        color: whitesmoke;
+        margin-bottom: 5px;
+        padding-top: 6px;
+    }
+    .sidebar{
+        position: fixed;
+        background-color: #424242;
+        width: 270px;
+        left: 0px;
+        color: white;
+        top: 0px;
+        height: 100%;
+        
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+    nav ul{
+        list-style: none;
+        padding: 0px;
+        font-family: "caveat brush";
+        font-size: 25px;
+        padding-left: 8px;
+        padding-right: 9px;
+        text-align: center;
+        
+    }
+    .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5{
+        border: 5px solid white;
+        line-height: 60px;
+        margin-bottom: 10px;
+    }
+    .sidebarobj5{
+        height: 60px;
+        display: flex;
+    }
+    .sidebarobj1:hover,.sidebarobj2:hover,.sidebarobj3:hover,.sidebarobj4:hover,.sidebarobj5:hover{
+        background-color: cadetblue;
+        cursor: pointer;
+    }
+    .content{
+        height: 100vh;
+    }
+    hr{
+        background-color: white;
+    }  
+    .hr.belowlogo{
+        color: white;
+        border: 2px solid white;
+    }
+    .hr.incontent{
+        background-color: #424242;
+        border: 2px solid #424242;
+    }
+    .contentplacholder{
+        padding-top: 6px;
+        height: 95px;
+    }
+
+    /* Sidebar Styles */
+
+    .logocolor{
+        color: #424242;
+        font-size: 80px;
+        width: 100%;
+        text-align: left;
+        font-family: 'Passero One';
+        margin-bottom: 5px;
+    }
+
+    .sidebar1 {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        background-color: #111;
+        transition: 0.5s;
+        
+        padding-top: 60px;
+        white-space: nowrap;
+    }
+
+    #main .sidebar1 {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+    }
+    #main {
+        margin-left: 271px;
+        transition: margin-left 0.5s;
+        overflow: hidden;
+    }
+  
+    .sidebarIconToggle {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        z-index: 99;
+        height: 22px;
+        margin: auto;
+        width: 25px;
+    }
+    .spinner {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: absolute;
+        height: 4px;
+        width: 25px;
+        background-color: #fff;
+    }
+    .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    .diagonal.part-1 {
+        position: relative;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        float: left;
+    }
+    .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    input[type="checkbox"]:checked ~ #sidebarMenu {
+        transform: translateX(0);
+    }
+    input[type=checkbox] {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        display: none;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        opacity: 0;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(135deg);
+        margin-top: 8px;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(-135deg);
+        margin-top: -9px;
+    }
+    @media only screen and (max-width: 1030px) { 
+        .spinner{
+            height: 4px;
+            width: 20px;
+            padding: 0%;
+        }
+        .sidebarIconToggle {
+            transition: all 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+            z-index: 99;
+            height: 22px;
+            justify-content: center; 
+            align-items: center;
+            width: 22px;
+        }
+
+        .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5{
+            border: 3px solid white;
+            font-size: 1.35rem;
+            line-height: 35px;
+            margin-bottom: 10px;
+        }
+
+        .sidebarobj5{
+            height: 35px;
+            display: flex;
+        }   
+        #main{
+            margin-left: 56px;
+        }
+        #mySidebar{
+            width: 56px;
+        }
+        .ArcTable{
+            width: 100%;
+            font-size: 1rem !important;
+            line-height: 0px;
+        }
+        tr{
+            line-height: 25px !important;
+        }
+        .svgg{
+            margin-bottom: -5px !important;
+        }
+    }
+
+    .archivePanel{
+        margin: auto;
+        top: 15px;
+        height: 70%;
+        position: relative;
+        width: 75%;
+        border: 4px solid rgb(37, 37, 37);
+        border-radius: 4px;
+        overflow-y: hidden;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .ArchiveTable{
+        border-collapse: collapse;
+        color: whitesmoke;
+        margin-left: -20px; 
+        margin-right: -20px;
+        right: 0px;
+        left:0px;
+        overflow: auto;
+        height: 90%;
+        text-align: center;
+    }
+    .ArcTable{
+        width: 100%;
+        font-size: 1.6rem;
+    }
+    .active{
+        color: rgb(183, 255, 38);
+    }
+    tr{
+        line-height: 60px;
+    }
+    tr:nth-child(even) {background-color: #888888;}
+    tr:nth-child(odd) {background-color: #424242;}
+
+    .mainContent{
+        height: 100vh;
+        overflow: auto;
+        margin-bottom: 30px;
+        bottom: 0px;
+    }
+    /* Scroll bar styling */
+    ::-webkit-scrollbar {
+        width: 3.5px;
+        height: 2px;
+    }
+ 
+        /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+        height: 5px;
+        width: 10px;
+    }
+</style>
+
+<body>
+    <div class="wrapper d-flex flex-row bd-highlight mb-3">
+        <div class="Mainsidebar sidebar1">
+            <nav class="sidebar" id="mySidebar">
+                <!-- Burger box -->
+                <div id="logoidnb" class="logo">Nyble</div>
+                <hr class="hr belowlogo">
+                <ul>
+                    <div id="sidebarobjid5" class="sidebarobj5" onclick="toggleSidebar()">
+                        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" onclick="toggleSidebar()">
+                        <label class="sidebarIconToggle">
+                            <div class="spinner diagonal part-1"></div>
+                            <div class="spinner horizontal"></div>
+                            <div class="spinner diagonal part-2"></div>
+                        </label>
+                    </div>
+                    <form id="newTestId" method="GET" action="/AdminQuesUploadCSV">
+                        <div onclick="newTest()" id="sidebarobjid1" class="sidebarobj1">New Test</div>
+                    </form>
+                    <form id="logOut" method="GET" action="/"></form>
+                        <div onclick="logOut()"id="sidebarobjid2" class="sidebarobj2">Log out</div>
+                    </form>
+                </ul>
+            </nav>
+        </div> 
+        
+        <div class="content" id="main">
+            <div id="logoid" class="contentplacholder logocolor"></div>
+            <hr class="hr incontent">
+            <div class="mainContent">
+                <div class="archivePanel" id="archivePanel">
+                    <div class="QpHeader" style="border-bottom: 2.5px solid whitesmoke; font-size: 3rem; color: whitesmoke; font-family: Petrona; margin-left: -20px; margin-right: -20px;right: 0px;left:0px; background-color: #424242; text-align: center;">Archive</div>
+                    <div class="ArchiveTable">
+                        <table class="ArcTable">
+                            <tr>
+                                <th>S.No</th>
+                                <th>Quiz Name</th>
+                                <th>Quiz Code</th>
+                                <th>Validity</th>
+                                <th>Total Marks</th>
+                                <th>Status</th>
+                            </tr>
+                            <!-- <tr>
+                                <td>01</td>
+                                <td>Math 101</td>
+                                <td>01-01-2002</td>
+                                <td>25</td>
+                                <td class="active">Active</td>
+                            </tr> -->
+                            <% var archiveDetails = ArchiveDetails; %> 
+                            <% if(archiveDetails!=null){ %>
+                                <% var count =0 %>
+                                <% archiveDetails.forEach(function(obj){ %>
+                                    <%count++ %>
+                                    <tr>
+                                        <td><%= count %></td>
+                                        <td class="quizid" data-_id=<%= obj._id %>><a href="/quizDetails/<%= obj._id %>" style="text-decoration: underline; cursor:pointer" onclick="showQuizDetails('<%= obj._id %>')"><%= obj.subject %></a></td>
+                                        <td><%= obj.uniqueCode %></td>
+                                        <td><%= obj.from %> - <%= obj.to %> </td>
+                                        <td><%= obj.marks %></td>
+                                        <% if( obj.status ==true){ %>
+                                            <td class="active">Active</td>
+                                        <% }else{ %>
+                                            <td class="done">Done</td>
+                                        <% } %>
+                                    </tr>
+                                <% }) %>
+                            <% } %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div> 
+<% var Data =alerts; %>
+</body>
+
+<script>
+    var getData = "<%= Data  %>";
+
+    function newTest(){
+        document.getElementById("newTestId").submit();
+    }
+    function logOut(){
+        document.getElementById("logOut").submit();
+    }
+
+    function widthchanged(mq){
+        if (mq.matches) {
+    // window width is at least 500px
+        mini = true;
+        toggleSidebar();
+    } else {
+    // window width is less than 500px
+        mini = false;
+        toggleSidebar();
+    } }   
+
+    // var mini = false;
+    const mq = window.matchMedia( "(min-width: 1030px)" ); 
+
+    widthchanged(mq);
+    mq.addListener(widthchanged);
+
+    function toggleSidebar() {
+        if (mini) {
+            document.getElementById("mySidebar").style.width = "271px";
+            document.getElementById("main").style.marginLeft = "271px";
+
+            document.getElementById("sidebarobjid1").innerHTML = "New Test";
+            document.getElementById("sidebarobjid2").innerHTML = "Log Out";
+
+
+            document.getElementById("logoid").classList.remove("logo");
+            document.getElementById("logoid").innerHTML ="";
+            document.getElementById("logoidnb").classList.remove("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="Nyble";
+
+            this.mini = false;
+        } else {
+            if(mq.matches){
+                document.getElementById("mySidebar").style.width = "90px";
+                document.getElementById("main").style.marginLeft = "90px";
+            }else{
+                document.getElementById("mySidebar").style.width = "56px";
+                document.getElementById("main").style.marginLeft = "56px";
+            }
+            document.getElementById("sidebarobjid1").innerHTML = "N.T";
+            document.getElementById("sidebarobjid2").innerHTML = `
+            <svg class="svgg" width="75%" height="90%" style="margin-bottom: -10px;" viewBox="0 0 16 16" class="bi bi-person-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+            `;
+
+
+            document.getElementById("logoid").classList.add("logo");
+            document.getElementById("logoid").innerHTML ="Nyble";
+            document.getElementById("logoidnb").classList.add("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="";
+            this.mini = true;
+        }
+    }
+</script>
+
+</html>

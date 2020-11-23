@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Walter Turncoat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Nyble</title>
+
+    <script src="svg-injector.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</head>
+<style>
+    html,body{
+        margin: 0;
+        height: 100%;
+    }
+    body{
+        background: url(https://subtlepatterns.com/patterns/symphony.png);
+        min-width: 1030px;
+        min-height: 620px;
+        overflow-y: hidden;
+        overflow-x: hidden;         
+
+    }
+    
+    .bodydark{
+        background:
+        linear-gradient(#9163F2, transparent),
+        linear-gradient(217deg, #8480F2, transparent),
+        linear-gradient(127deg, #30A8F2, transparent),
+        linear-gradient(366deg, #32BAD9, transparent),
+        linear-gradient(90deg, #48D9CA, transparent);
+    background-blend-mode: screen;
+    background-repeat: no-repeat;
+    background-size:cover;
+    }
+
+    .logo{
+        font-family: Passero One;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 135px;
+        margin-bottom: 0px;
+        color: #000000;
+        padding:0px;        
+    }
+    .sublogo{
+        font-family: Walter Turncoat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 27px;
+        line-height: 57px;
+        text-transform: capitalize;
+        position: relative;
+        text-align: right;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        top: 10%;
+        color: #000000;
+    } 
+    .logo_box{
+        position: absolute;
+        left: 12%;
+        top: 17%;
+        width: 500px;
+    }
+
+    .loginbox{
+        position: absolute;
+        width: 390px;
+        height: 450px;
+        left: 60%;
+        top: 21%;
+        border-radius: 39px;
+        display: inline-grid;
+        grid-row: 2;
+        margin-bottom: 40px;
+    }
+    #unique_code{
+        position: relative;
+        width: 150px;
+        padding: 10px 20px;
+        font-family: 'Walter Turncoat';
+        font-size: x-large;
+        display: inline-block;
+        height: 60px;
+        color: #ffffff;
+        background-color: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: F3F3F3;
+        border-radius: 10px;
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+        box-sizing: border-box;
+    }
+    #admin{
+        position: relative;
+        width: 250px;
+        top:15%;
+        color: #ffffff;
+        background: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #ffffff;        
+        font-family: 'Walter Turncoat';
+        padding: 10px 20px;
+        margin: 8px 0;
+        font-size: x-large;
+        border-radius: 10px;
+        cursor: pointer;  
+    }
+  
+    #unique_code_submit{
+        position: relative;
+        height: 60px;
+        font-family: 'Walter Turncoat';
+        color: #f5f4f4;
+        background: #1B1B1B;
+        border: 3px solid #F3F3F3;        
+        padding: 1px 20px;
+        font-size: x-large;
+        border-radius: 10px;
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+        cursor: pointer;  
+
+    }
+    
+    .darkmode{
+        color: #000000 !important;
+        background-color: #dddddd !important;
+        border-color: #1B1B1B !important;
+    }
+    .lightmode{
+        color: #8F8F8F !important;
+        background-color: #1B1B1B !important;
+        border-color: #F3F3F3 !important;
+    }
+
+    .buttonhover_light:hover{
+        color: #000000 !important;
+        background-color: #ffffff !important;
+        transition-duration: 200ms;
+    }
+    .buttonhover_dark:hover{
+        color: #ffefef !important;
+        background-color: #000000 !important; 
+        transition-duration: 200ms;
+    }
+
+    .mb-3{
+        top: 50%;
+        width: 250px;
+    }
+    .icon{
+        position: absolute;
+        height: 6%;
+        width: 6%;
+        background-size: cover;
+        right: 15px;
+        top: 15px;
+
+        /*Dark mode settings*/ 
+        
+    }
+    .icon#sun{
+        
+    }
+    .icon#moon{
+        display: inline;
+    }
+    .adminbutton{
+        width: 250px;
+        top:15%;
+    }
+  
+ 
+    .adminloginbox{
+        position: absolute;
+        width: 390px;
+        height: 450px;
+        left: 60%;
+        top: 21%;
+        background: #1B1B1B;
+        border-radius: 39px;
+        display: inline-grid;
+        grid-row: 3;
+        margin-bottom: 40px;
+
+        display: none;
+
+        }  
+
+    #mail_id,#admin_password{
+        position: relative;
+        width: 190px;
+        padding: 10px 20px;        
+        font-family: 'Walter Turncoat';
+        font-size: x-large;
+        display: inline-block;
+        height: 60px;
+        color: #fffbfb;
+        background-color: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #F3F3F3;
+        border-radius: 10px;
+        box-sizing: border-box;    
+    }
+    #inputcont.mb-3{
+        width: 335px;
+        top: 20%;
+    }
+
+    #createacc{
+        position: relative;
+        width: 335px;
+        top:15%;
+        left: 7%;
+        color: #ffffff;
+        background: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #ffffff;        
+        font-family: 'Walter Turncoat';
+        padding: 10px 20px;
+        margin: 8px 0;
+        border-radius: 10px;
+        cursor: pointer;  
+        font-size: 20px;
+    }
+    
+    #backbutton{
+        position: relative;
+        width: 160px;
+        top:15%;
+        color: #ffffff;
+        background: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #ffffff;        
+        font-family: 'Walter Turncoat';
+        padding: 10px 20px;
+        margin: 8px 0;
+        font-size: x-large;
+        margin-right: 7px;
+        border-radius: 10px;
+        cursor: pointer;  
+    }
+
+    .flexb{
+        display: flex;
+        left: 27px;
+    }    
+
+    #signin{
+        position: relative;
+        width: 160px;
+        top:15%;
+        color: #ffffff;
+        background: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #ffffff;        
+        font-family: 'Walter Turncoat';
+        padding: 10px 20px;
+        margin: 7px;
+        font-size: x-large;
+        border-radius: 10px;
+        cursor: pointer;  
+    }
+    
+    .signinbutton{
+        top: 10%;
+        margin-bottom: 20px;
+    }
+
+     /*CSS queries*/
+
+    /* Small devices (landscape phones, 576px and up)*/
+    @media only screen and (max-width: 1030px) { 
+        .loginbox,.adminloginbox{
+            width: 780px;
+            height: 900px;
+            top: 57%;
+            left: 50%;
+            /* bring your own prefixes */
+            transform: translate(-47%, -40%);
+        }
+        .logo_box{
+            position: fixed;
+            left: 50%;
+            top: 15%;
+            /* bring your own prefixes */
+            transform: translate(-50%, -50%);
+        }
+        .logo{
+            font-size: 220px;
+        }
+        .sublogo{
+            font-size: 50px;
+        }
+        .mb-3{
+            width: 650px !important;
+        }
+        #signin,#backbutton{
+            width: 315px;
+            height: 120px;
+            font-size: 65px;
+            border-width: 7px;
+            border-style: solid;
+            border-color:#fffcfc;
+            color: #F3F3F3;
+        }
+
+        #signin{
+            left: 26px;
+        }
+        #backbutton{
+            margin-right: 15px;
+            left: 38px;
+        }
+
+        #createacc{
+            width: 650px;
+            height: fit-content;
+            font-size: 48px !important;
+            border-width: 7px;
+            padding-inline: 0px;
+            border-style: solid;
+            border-color:#fffcfc;
+            color: #F3F3F3;
+        }
+        #createacc{
+            left: 8%;
+        }
+        .adminbutton{
+            width: 650px !important;
+        }
+        #admin{
+            width: 100%;
+            height: 150px;
+            font-size: 65px;
+            border-width: 7px;
+            border-style: solid;
+            border-color:#fffcfc;
+            color: #F3F3F3;
+        }
+
+        #mail_id,#admin_password{
+            height: 120px;
+            width: 1000px;
+            font-size: 45px;
+            padding-left: 40px;
+            border-width: 7px;
+            border-color:#fffcfc;            
+            border-style: solid; 
+        }
+
+        #unique_code{
+            height: 150px;
+            width: 100px;
+            font-size: 65px;
+            padding-left: 40px;
+            border-width: 7px;
+            border-color:#fffcfc;            
+            border-style: solid;
+        }
+        #unique_code_submit{
+            font-size: 60px;
+            height: 150px;
+            width: 150px;
+            border-width: 7px;
+            border-style: solid;
+        }
+        .icon{
+            height: 10%;
+            width: 10%;
+        }
+    }
+
+    /* Medium devices (tablets, 768px and up)*/
+    @media (max-height: 478px) { 
+        .loginbox{top: 800px;}
+        .logo_box{top:200px;}
+
+     }
+    /*CSS Ending*/
+
+</style>
+<body id="body">
+    <div class="logo_box" id="logo_box">
+        <h1 class="logo" id="logo">Nyble</h1>
+        <p class="sublogo" id="sublogo">Improvise Adapt Overcome</p>
+    </div>
+
+    <img class="icon" style="display: none;" id="sun" src="/Templates/open-iconic/svg/sun.svg" onclick="theme()">  
+    <img class="icon" id="moon" src="/Templates/open-iconic/svg/moon.svg" onclick="theme()">
+
+    <div class="loginbox row w-500 mx-auto lightmode" id="loginbox">
+        <center>
+          <!--  <input type="text" id="unique_code" name="unique_code" placeholder="Code">-->
+          <form  method="POST" action="/ramdomact"  class="input-group mb-3">
+            <input type="text" id="unique_code" maxlength="5" name="uniqueCode" class="form-control" placeholder="Code" aria-label="Code" required aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button type="submit" formaction="/StudentPortal" class="btn btn-outline-secondary buttonhover_light" id="unique_code_submit">Go</button>
+            </div>
+          </form>
+        </center>
+        <center>
+            <form method="get" action="/ramdomact"  class="input-group adminbutton">
+                <button type="submit" id="admin" formaction="/AdminSignin"  class="buttonhover_light">Admin</button>
+            </form>
+        </center>
+    </div>
+    
+
+
+<% var test =alerts; %> 
+</body>
+   
+<script>
+    var getTest = "<%= test  %>";
+    if(getTest !=10){
+        alert(getTest)
+    }
+    function registration_form(){
+        document.getElementById("loginbox").style.cssText= "display:none;"
+        document.getElementById("adminloginbox").style.cssText= "display:inline-grid;"
+    }
+
+    function back(){
+        document.getElementById("loginbox").display="inline-grid"
+        document.getElementById("adminloginbox").display="none"
+    }
+    function theme(){
+        var elem,style;
+        elem = document.querySelector('#sun');
+        style = getComputedStyle(elem);
+
+        if (style.display =="none"){
+            /*Sun on press-> Light mode*/
+            document.getElementById("moon").style.cssText= "display:none;"
+            document.getElementById("sun").style.cssText= "display:block !important;"
+            document.getElementById("sun").style.cssText= "filter:invert(1);"
+
+            document.getElementById("body").style.cssText = "background-color: #1B1B1B;"
+            document.getElementById("logo").style.cssText = "color:white;"
+            document.getElementById("sublogo").style.cssText = "color:white;"
+
+            
+            document.getElementById("admin").classList.remove("buttonhover_light")
+            document.getElementById("admin").classList.add("buttonhover_dark")
+            document.getElementById("admin").classList.remove("lightmode")
+            document.getElementById("admin").classList.add("darkmode")
+
+            document.getElementById("unique_code_submit").classList.remove("buttonhover_light")
+            document.getElementById("unique_code_submit").classList.add("buttonhover_dark")
+            document.getElementById("unique_code_submit").classList.remove("lightmode")
+            document.getElementById("unique_code_submit").classList.add("darkmode")
+            
+            document.getElementById("unique_code").classList.remove("lightmode")
+            document.getElementById("unique_code").classList.add("darkmode")
+
+            document.getElementById("loginbox").classList.remove("lightmode")
+            document.getElementById("loginbox").classList.add("darkmode")
+
+            document.getElementById("adminloginbox").style.cssText = "background-color: #dddddd;"
+
+            document.getElementById("mail_id").classList.remove("lightmode")
+            document.getElementById("mail_id").classList.add("darkmode")
+
+            document.getElementById("admin_password").classList.remove("lightmode")
+            document.getElementById("admin_password").classList.add("darkmode")
+
+            document.getElementById("signin").classList.remove("buttonhover_light")
+            document.getElementById("signin").classList.add("buttonhover_dark")
+            document.getElementById("signin").classList.remove("lightmode")
+            document.getElementById("signin").classList.add("darkmode")
+            
+            document.getElementById("createacc").classList.remove("buttonhover_light")
+            document.getElementById("createacc").classList.add("buttonhover_dark")
+            document.getElementById("createacc").classList.remove("lightmode")
+            document.getElementById("createacc").classList.add("darkmode")
+            
+            /*d= white, 0 black*/ 
+        }else{
+            /*Moon on press-> Dark mode*/
+            document.getElementById("moon").style.cssText= "display:block;"
+            document.getElementById("sun").style.cssText= "display:none;"
+
+            document.getElementById("body").style.cssText = "background-color: #ffffff;"
+            document.getElementById("logo").style.cssText = "color:black;"
+            document.getElementById("sublogo").style.cssText = "color:black;"
+
+            document.getElementById("admin").classList.add("buttonhover_light")
+            document.getElementById("admin").classList.remove("buttonhover_dark")
+            document.getElementById("admin").classList.add("lightmode")
+            document.getElementById("admin").classList.remove("darkmode")
+             
+            document.getElementById("unique_code_submit").classList.add("buttonhover_light")
+            document.getElementById("unique_code_submit").classList.remove("buttonhover_dark")
+            document.getElementById("unique_code_submit").classList.add("lightmode")
+            document.getElementById("unique_code_submit").classList.remove("darkmode")
+            
+            document.getElementById("unique_code").classList.add("lightmode")
+            document.getElementById("unique_code").classList.remove("darkmode")
+
+            document.getElementById("loginbox").classList.add("lightmode")
+            document.getElementById("loginbox").classList.remove("darkmode")
+            
+            document.getElementById("adminloginbox").style.cssText = "background-color: #1B1B1B;"
+
+            document.getElementById("mail_id").classList.add("lightmode")
+            document.getElementById("mail_id").classList.remove("darkmode")
+
+            document.getElementById("admin_password").classList.add("lightmode")
+            document.getElementById("admin_password").classList.remove("darkmode")       
+            
+            document.getElementById("signin").classList.add("buttonhover_light")
+            document.getElementById("signin").classList.remove("buttonhover_dark")
+            document.getElementById("signin").classList.add("lightmode")
+            document.getElementById("signin").classList.remove("darkmode")
+
+            document.getElementById("createacc").classList.add("buttonhover_light")
+            document.getElementById("createacc").classList.remove("buttonhover_dark")
+            document.getElementById("createacc").classList.add("lightmode")
+            document.getElementById("createacc").classList.remove("darkmode")
+
+        }
+    }
+
+</script>
+</html>

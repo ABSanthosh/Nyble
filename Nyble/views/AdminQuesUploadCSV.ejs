@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Caveat Brush' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <title>Nyble | CSV upload Portal</title>
+</head>
+
+<style>
+    body{
+        background: url(https://subtlepatterns.com/patterns/symphony.png);
+        margin: 0px 0px 0px 0px;
+    }
+    .logo{
+        font-size: 80px;
+        width: 100%;
+        text-align: center;
+        font-family: 'Passero One';
+        color: whitesmoke;
+        margin-bottom: 5px;
+        padding-top: 6px;
+    }
+    .sidebar{
+        position: fixed;
+        background-color: #424242;
+        width: 270px;
+        left: 0px;
+        color: white;
+        top: 0px;
+        height: 100%;
+        
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+    nav ul{
+        list-style: none;
+        padding: 0px;
+        font-family: "caveat brush";
+        font-size: 25px;
+        padding-left: 8px;
+        padding-right: 9px;
+        text-align: center;
+        
+    }
+    .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5{
+        border: 5px solid white;
+        line-height: 60px;
+        margin-bottom: 10px;
+    }
+    .sidebarobj5{
+        height: 60px;
+        display: flex;
+    }
+    .sidebarobj1:hover,.sidebarobj2:hover,.sidebarobj3:hover,.sidebarobj4:hover,.sidebarobj5:hover{
+        background-color: cadetblue;
+        cursor: pointer;
+    }
+    .content{
+        height: 100vh;
+        overflow: hidden;
+    }
+    hr{
+        background-color: white;
+    }  
+    .hr.belowlogo{
+        color: white;
+        border: 2px solid white;
+    }
+    .hr.incontent{
+        background-color: #424242;
+        border: 2px solid #424242;
+    }
+    .contentplacholder{
+        padding-top: 6px;
+        height: 95px;
+    }
+
+    /* Sidebar Styles */
+
+    .logocolor{
+        color: #424242;
+        font-size: 80px;
+        width: 100%;
+        text-align: left;
+        font-family: 'Passero One';
+        margin-bottom: 5px;
+    }
+
+    .sidebar1 {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        background-color: #111;
+        transition: 0.5s;
+        
+        padding-top: 60px;
+        white-space: nowrap;
+    }
+
+    #main .sidebar1 {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+    }
+    #main {
+        margin-left: 271px;
+        transition: margin-left 0.5s;
+        overflow: hidden;
+    }
+  
+    .sidebarIconToggle {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        z-index: 99;
+        height: 22px;
+        margin: auto;
+        width: 25px;
+    }
+    .spinner {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: absolute;
+        height: 4px;
+        width: 25px;
+        background-color: #fff;
+    }
+    .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    .diagonal.part-1 {
+        position: relative;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        float: left;
+    }
+    .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    input[type="checkbox"]:checked ~ #sidebarMenu {
+        transform: translateX(0);
+    }
+    input[type=checkbox] {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        display: none;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        opacity: 0;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(135deg);
+        margin-top: 8px;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(-135deg);
+        margin-top: -9px;
+    }
+    @media only screen and (max-width: 1030px) { 
+        .spinner{
+            height: 4px;
+            width: 20px;
+            padding: 0%;
+        }
+        .sidebarIconToggle {
+            transition: all 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+            z-index: 99;
+            height: 22px;
+            justify-content: center; 
+            align-items: center;
+            width: 22px;
+        }
+
+        .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5{
+            border: 3px solid white;
+            font-size: 1.35rem;
+            line-height: 35px;
+            margin-bottom: 10px;
+        }
+
+        .sidebarobj5{
+            height: 35px;
+            display: flex;
+        }   
+        #main{
+            margin-left: 56px;
+        }
+        #mySidebar{
+            width: 56px;
+        }
+    }
+    
+    .mainContent{
+        height: 80vh;
+        overflow: auto;
+        margin-bottom: 30px;
+        bottom: 0px;
+    }
+    .quesPanel{
+        margin: auto;
+        top: 15px;
+        height: 60%;
+        position: relative;
+        border: 4px solid rgb(37, 37, 37);
+        border-radius: 8px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        padding-top: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .question{
+        width: 100%;
+        font-size: 1.3rem;
+        margin-top: 1rem;
+        margin-bottom: 15px;
+        font-family: "Walter Turncoat";
+    }
+    .optionsPanel{
+        width: 100%;
+    }
+    .optionBox{
+        position: relative;
+        width: 50%;
+        font-family: "Walter Turncoat";
+        display: inline-flex;
+        margin-bottom: 15px;
+    }
+    .option{
+        border: 2px solid #4242429c ;
+        left: 0px;
+        padding-left: 10px;
+        font-size: 1.5rem;
+        right: 0px;
+        width: 100%;
+        border-radius: 4px;
+    }
+    #radio{
+        width:3em;
+        height:3em;
+        background-color: deepskyblue;
+    }
+    input[type=radio][disabled]{
+       background: deepskyblue;
+    }
+    input[type=radio]{
+        margin: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    .quesCont{
+        margin: auto;
+        top: 15px;
+        position: relative;
+        border: 3px solid #424242;
+        width: 65%;
+        border-radius: 4px;
+        overflow-y: auto;
+
+        padding-top: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 30px;
+    }
+    .uploadCont{
+        top: 15px;
+        display: flex;
+        margin: auto;
+        border-radius: 10px;
+        border: 2px dashed #424242;
+        width: 67%;
+
+        padding-top: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 5px;
+    }
+    .viewQues{
+        width: 20%;
+        display: flex;
+        margin: auto;
+        margin-top: 15px;
+        border-radius: 10px;
+        border: 2px solid #424242;        
+        text-align: center;
+        font-size: 1.5rem;
+
+        padding-top: 20px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 20px;
+    }
+    .viewQues:hover{
+        background-color: rgb(201, 201, 201);
+        transition: ease-in-out 0.3s;
+        cursor: pointer;
+    }
+    .uploadCont:hover{
+        background-color: rgb(247, 247, 215);
+        transition: ease-in-out 0.5s;
+    }
+    .dragndrop{
+        width: 75%;
+        margin: auto;
+        text-align: center;
+        font-size: 2rem;
+        
+        float: left;
+    }
+    .clicktodrop{
+        background-color: #424242;
+        height: 80px;
+        width: 25%;
+        border-radius: 0px 10px 10px 0px;
+        font-size: 2rem;
+        line-height: 80px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+    .inputgroup{
+        margin: 10px 0px 10px 0px;
+        padding: 20px 0px 0px 0px;
+        text-align: right;
+        width: 100%;
+        font-family: "Amarante";
+        color: #C4C4C4;
+    }
+    .inputgroup input[type="time"]::-webkit-datetime-edit-ampm-field {
+        display: none;
+    }
+    .inputgroup input[type="number"]{width: 100px;}
+    .inputgroup input{
+        text-align: center;
+        border: 0;
+        outline: 0;
+        border-bottom: 2px solid #424242;
+        font-size: 1.5rem;
+    }
+    .Ttime{
+        font-size: 1.5rem;
+        color: dimgrey;
+    }
+</style>
+
+<body>
+    <div class="wrapper d-flex flex-row bd-highlight mb-3">
+        <div class="Mainsidebar sidebar1">
+            <nav class="sidebar" id="mySidebar">
+                <!-- Burger box -->
+                <div id="logoidnb" class="logo">Nyble</div>
+                <hr class="hr belowlogo">
+                <ul>
+                    <div id="sidebarobjid5" class="sidebarobj5" onclick="toggleSidebar()">
+                        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" onclick="toggleSidebar()">
+                        <label class="sidebarIconToggle">
+                            <div class="spinner diagonal part-1"></div>
+                            <div class="spinner horizontal"></div>
+                            <div class="spinner diagonal part-2"></div>
+                        </label>
+                    </div>
+                    <form id="sidebarobjid2form" method="GET" action="/AdminArchive">
+                        <div onclick="newText()" id="sidebarobjid2" class="sidebarobj2">Archive</div>
+                    </form>
+                </ul>
+            </nav>
+        </div> 
+        <div class="content" id="main">
+            <div id="logoid" class="contentplacholder logocolor"></div>
+            <hr class="hr incontent">
+            <div class="mainContent">
+                <div class="uploadCont" id="uploadCont">
+                    <div id="dragndrop" class="dragndrop">DRAG & DROP .CSV </div>
+                    <input onchange="onChooseFile(event)" type="file" name="fileToUpload" id="fileToUpload"style="display:none;"/>
+                    <p style="display: none;" id="Qcontents"></p>
+                    <div id="clicktodrop" class="clicktodrop">Or Click Here</div>
+                </div>
+
+                <div class="quesCont" id="quesCont" style="display: none;">
+                    <div style="display: none; font-size: 1.5rem; margin-top: 8px; margin-bottom: 4px;" class="tTime" id="tTime">Time:</div>
+                    <div style="display: none; font-size: 1.5rem; margin-top: 4px; margin-bottom: 8px;" class="mMark" id="mMark">Marks:</div>
+                </div>
+            </div>
+        </div>  
+    </div> 
+</body>
+
+<script>
+    function dashboard(){
+        document.getElementById("sidebarobjid1form").submit();
+    }
+    function newText(){
+        document.getElementById("sidebarobjid2form").submit();
+    }
+    function settings(){
+        document.getElementById("sidebarobjid3form").submit();
+    }
+
+    var holder = document.getElementById('dragndrop');
+    holder.ondragover = function() {return false;};
+    holder.ondragend = function() {return false;};
+    holder.ondrop = function(e) {
+        e.preventDefault();
+        var file = e.dataTransfer.files[0],reader = new FileReader();
+        sendFiletoNode(e)
+        return false;
+    };
+
+
+    $('#clicktodrop').click(function(){ 
+        $('#fileToUpload').trigger('click'); 
+    });
+ 
+    function sendFiletoNode(file){
+        var formData = new FormData(),file, reader;
+        try{
+            formData.append('CSVfiles', file.target.files[0])
+        }
+        catch(err){
+            formData.append('CSVfiles', file.dataTransfer.files[0])
+        }
+
+        $.ajax({
+                url : '/AdminQuesUploadCSV',
+                type : 'POST',
+                data : formData,
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,  // tell jQuery not to set contentType
+                success : function(data) {
+                    if(data[0].nModified==1){
+                        alert("Successfully uploaded questions to database!")
+                        document.getElementById("uploadCont").style.display = 'none';
+                        var questionNo=0
+                        data[1].forEach(obj => {
+                            var changer = 'checked="checked"'
+                            if(obj.correctOption == 1){r1 = changer;r2 = '';r3 = '';r4 = '';}
+                            else if(obj.correctOption == 2){r2 = changer;r1 = '';r3 = '';r4 = '';}
+                            else if(obj.correctOption == 3){r3 = changer;r2 = '';r1 = '';r4 = '';}
+                            else if(obj.correctOption == 4){r4 = changer;r2 = '';r3 = '';r1 = '';}
+                            document.getElementById("quesCont").style.display="block"
+                        
+                            var showQuestionTemp = 
+                            `
+                            <div class="quesPanel" id="quesPanel">
+                                <div class="question">`+(questionNo+=1)+") "+obj.question+`</div>
+                                <div class="optionsPanel">
+                                    <div class="optionBox">
+                                        <input disabled type="radio" class="rOne" id="radio" name="Answer`+questionNo+`" `+r1+`>
+                                        <div class="option">`+obj.options.option1+`</div>
+                                    </div>
+                                    <div class="optionBox">
+                                        <input disabled type="radio" class="rTwo" id="radio" name="Answer`+questionNo+`" `+r2+`>
+                                        <div class="option">`+obj.options.option2+`</div>
+                                    </div>
+                                    <div class="optionBox">
+                                        <input disabled type="radio" class="rThree" id="radio" name="Answer`+questionNo+`" `+r3+`>
+                                        <div class="option">`+obj.options.option3+`</div>
+                                    </div>
+                                    <div class="optionBox">
+                                        <input disabled type="radio" class="rFour" id="radio" name="Answer`+questionNo+`" `+r4+`>
+                                        <div class="option">`+obj.options.option4+`</div>
+                                    </div>
+                                </div>    
+                                <div class="inputgroup">
+                                    <div class="Ttime" type="number" placeholder="Marks">+`+obj.mark.pMarks+`:  Positive Marks</div>
+                                    <div class="Ttime" type="number" placeholder="Marks">-`+obj.mark.nMarks+`: Negative Marks</div>
+                                </div>     
+                            </div>
+                            `
+
+                            var div = document.createElement('div');
+                            var mC = document.querySelector(".quesCont");
+                            div.innerHTML = showQuestionTemp;
+                            var parentnode = document.querySelector(".quesCont");
+                            parentnode.insertBefore(div,mC.childNodes[mC.childNodes.length-2]);
+                            
+                        });
+                    }
+                    else{alert("Error in uploading questions file\n"+JSON.stringify(data))}
+                },
+                error:function(err){}
+        });
+    }
+
+
+    function onChooseFile(event) {
+        if (typeof window.FileReader !== 'function')
+            throw ("The file API isn't supported on this browser.");
+        let input = event.target;
+        if (!input)
+            throw ("The browser does not properly implement the event object");
+        if (!input.files)
+            throw ("This browser does not support the `files` property of the file input.");
+        if (!input.files[0])
+            return undefined;
+        let file = input.files[0];
+        let fr = new FileReader();
+        sendFiletoNode(event)
+        fr.readAsText(file);
+    }
+
+
+    function widthchanged(mq){
+        if (mq.matches) {
+            mini = true;
+            toggleSidebar();
+        } else {
+            mini = false;
+            toggleSidebar();
+        } 
+    }  
+
+    // var mini = false;
+    const mq = window.matchMedia( "(min-width: 1030px)" ); 
+
+    widthchanged(mq);
+    mq.addListener(widthchanged);
+    function toggleSidebar() {
+        if (mini) {
+            document.getElementById("mySidebar").style.width = "271px";
+            document.getElementById("main").style.marginLeft = "271px";
+
+            document.getElementById("sidebarobjid2").innerHTML = "Archive";
+
+            document.getElementById("logoid").classList.remove("logo");
+            document.getElementById("logoid").innerHTML ="";
+            document.getElementById("logoidnb").classList.remove("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="Nyble";
+
+            this.mini = false;
+        } else {
+            if(mq.matches){
+                document.getElementById("mySidebar").style.width = "90px";
+                document.getElementById("main").style.marginLeft = "90px";
+            }else{
+                document.getElementById("mySidebar").style.width = "56px";
+                document.getElementById("main").style.marginLeft = "56px";
+            }
+            document.getElementById("sidebarobjid2").innerHTML = "Arc.";
+
+            document.getElementById("logoid").classList.add("logo");
+            document.getElementById("logoid").innerHTML ="Nyble";
+            document.getElementById("logoidnb").classList.add("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="";
+            this.mini = true;
+        }
+    }
+</script>
+
+</html>

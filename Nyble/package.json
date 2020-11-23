@@ -1,0 +1,29 @@
+{
+  "name": "rnyble",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Santhosh",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.0.0",
+    "csv-parser": "^2.3.3",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "moment-range": "^4.0.2",
+    "mongoose": "^5.10.13",
+    "multer": "^1.4.2",
+    "node-datetime": "^2.1.2",
+    "nodemon": "^2.0.6"
+  }
+}

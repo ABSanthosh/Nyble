@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Caveat Brush' rel='stylesheet'>
+
+    <title>Nyble | Student Instructions</title>
+</head>
+
+<style>
+    body{
+        background: url(https://subtlepatterns.com/patterns/symphony.png);
+        margin: 0px 0px 0px 0px;   
+    }
+    .logo{
+        font-size: 80px;
+        width: 100%;
+        text-align: center;
+        font-family: 'Passero One';
+        color: whitesmoke;
+        margin-bottom: 5px;
+        padding-top: 6px;
+    }
+    .sidebar{
+        position: fixed;
+        background-color: #424242;
+        width: 270px;
+        left: 0px;
+        color: white;
+        top: 0px;
+        height: 100%;
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+    nav #other_menus{
+        list-style: none;
+        padding: 0px;
+        font-family: "caveat brush";
+        font-size: 25px;
+        padding-left: 8px;
+        position: relative;
+        padding-right: 9px;
+        text-align: center;
+        
+    }
+    .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5{
+        border: 5px solid white;
+        line-height: 60px;
+        margin-bottom: 10px;
+    }
+    .sidebarobj5{
+        height: 60px;
+        display: flex;
+    }
+    .sidebarobj4:hover,.sidebarobj5:hover{
+        background-color: cadetblue;
+        cursor: pointer;
+    }
+
+    hr{
+        background-color: white;
+    }  
+    .hr.belowlogo{
+        color: white;
+        border: 2px solid white;
+    }
+    .hr.incontent{
+        background-color: #424242;
+        border: 2px solid #424242;
+    }
+    .contentplacholder{
+        padding-top: 6px;
+        height: 95px;
+    }
+
+    /* Sidebar Styles */
+
+    .logocolor{
+        color: #424242;
+        font-size: 80px;
+        width: 100%;
+        text-align: left;
+        font-family: 'Passero One';
+        margin-bottom: 5px;
+    }
+
+    .sidebar1 {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        background-color: #111;
+        transition: 0.5s;
+        
+        padding-top: 60px;
+        white-space: nowrap;
+    }
+
+    #main .sidebar1 {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+    }
+    #main {
+        margin-left: 271px;
+        transition: margin-left 0.5s;
+    }
+  
+    .sidebarIconToggle {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        z-index: 99;
+        height: 22px;
+        margin: auto;
+        width: 25px;
+    }
+    .spinner {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: absolute;
+        height: 4px;
+        width: 25px;
+        background-color: #fff;
+    }
+    .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    .diagonal.part-1 {
+        position: relative;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        float: left;
+    }
+    .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    input[type="checkbox"]:checked ~ #sidebarMenu {
+        transform: translateX(0);
+    }
+    input[type=checkbox] {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        display: none;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        opacity: 0;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(135deg);
+        margin-top: 8px;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(-135deg);
+        margin-top: -9px;
+    }
+    #starttest{
+        bottom: 0px;
+        list-style: none;
+        padding: 0px;
+        font-family: "caveat brush";
+        font-size: 25px;
+        position: absolute;
+        padding-left: 8px;
+        padding-right: 9px;
+        text-align: center;
+        right: 0px;
+        left: 0px;
+    }
+    @media only screen and (max-width: 1030px) { 
+        .spinner{
+            height: 4px;
+            width: 20px;
+            padding: 0%;
+        }
+        .sidebarIconToggle {
+            transition: all 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+            z-index: 99;
+            height: 22px;
+            justify-content: center; 
+            align-items: center;
+            width: 22px;
+        }
+
+        .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5{
+            border: 3px solid white;
+            font-size: 1.35rem;
+            line-height: 35px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+
+        .sidebarobj5{
+            height: 35px;
+            display: flex; 
+        }   
+        #main{
+            margin-left: 56px;
+        }
+        #mySidebar{
+            width: 56px;
+        }
+    }
+        /* Scroll bar styling */
+        ::-webkit-scrollbar {
+        width: 3.5px;
+        height: 2px;
+    }
+ 
+        /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+        height: 5px;
+        width: 10px;
+    }
+    
+    /* Main Content stylings */
+    .content{
+        height: 100vh;
+        position: relative;
+        overflow: scroll;        
+    }
+    .insPanel{
+        margin: auto;
+        top: 15px;
+        height: 75%;
+        position: relative;
+        width: 75%;
+        border: 4px solid rgb(37, 37, 37);
+        border-radius: 4px;
+        overflow: scroll;
+
+        padding-top: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .instructions{
+        font-size: 1.5rem;
+    }
+
+</style>
+
+<body>
+    <div class="wrapper d-flex flex-row bd-highlight mb-3">
+        <div class="Mainsidebar sidebar1">
+            <nav class="sidebar" id="mySidebar">
+                <!-- Burger box -->
+                <div id="logoidnb" class="logo">Nyble</div>
+                <hr class="hr belowlogo">
+                <ul id="other_menus">
+                    <div id="sidebarobjid5" class="sidebarobj5" onclick="toggleSidebar()">
+                        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" onclick="toggleSidebar()">
+                        <label class="sidebarIconToggle">
+                            <div class="spinner diagonal part-1"></div>
+                            <div class="spinner horizontal"></div>
+                            <div class="spinner diagonal part-2"></div>
+                        </label>
+                    </div>    
+                    <div id="sidebarobjid1" class="sidebarobj1">Time</div>
+                    <div id="sidebarobjid2" class="sidebarobj2">No. Of Questions<br>##</div>
+                    <div id="sidebarobjid3" class="sidebarobj3">
+                        <label>Marking Scheme</label>
+                        <div style="display: flex; height: 35px;">
+                            <div style="margin: auto; margin-bottom: 10px; width: 80px; line-height: 25px; background-color: yellowgreen; color: #424242;">hello</div>
+                            <div style="margin: auto; margin-bottom: 10px; width: 80px; line-height: 25px; background-color: rgb(255, 97, 97); color: #424242;">there</div>
+                        </div>
+                    </div>
+                </ul>
+                <ul id="starttest">
+                    <form action="/StudentPortalExam" method="POST" id="sidebarobjid4form">
+                        <div onclick="startTest()" id="sidebarobjid4" class="sidebarobj4">Start Test</div>
+                    </form>
+                </ul>
+            </nav>
+        </div> 
+
+        <div class="content" id="main">
+            <div id="logoid" class="contentplacholder logocolor"></div>
+            <hr class="hr incontent">
+            <div class="insPanel" id="insPanel">
+                <label id="insLogo" style="font-family: 'Caveat Brush'; font-size: 3rem; color: #3b3b3b;">Instructions</label><br>
+                <label id="insLogo" style="font-family: 'Caveat Brush'; font-size: 1.75rem; color: #3b3b3b;">Subject <%= subjectName %></label>
+                <ul class="instructions default" id="instructions1" style="position: relative;">
+                    <li> Timer will start as soon as you start the test.</li>
+                    <br>
+                    <li> Each question might have different grading scheme. So look at "Marking Scheme" pallet to make sure you know the value of the question</li>
+                    <li> Quiz will be over once the timer in the left panel hits "00:00" and no extra time will be provided.</li>
+                    <li> Quiz will automatically be submitted if the time ends so keep an eye on the timer.</li>
+                    <br>
+                    <li> Once you finish answering the quiz, you can submit the test with the "Submit Test" button on the left and the response will be recorded in the database. </li>
+                    <br>
+                    <li> You will be redirected to the main page once the quiz is submitted.</li>
+                    
+                </ul>                
+                <br>
+                <hr>
+                <ul class="instructions Maunal" id="instructions2" style="position: relative;">
+                    <li> Note: You can take the quiz only once so make sure to give your best.</li>
+                    <li> Note: Quiz will auto submit if you change tabs.</li>
+                </ul>                
+            </div>
+        </div>  
+    </div> 
+    <% var numberOfquestions =noOfQuestion; %> 
+    <% var pmark = positiveMarks; %> 
+    <% var nmark = negativeMarks; %>
+    <% var Quiztime = quiztime; %>
+</body>
+
+<script>
+    var getnumberOfquestions = "<%= numberOfquestions  %>";
+    var getpmark = "<%= pmark  %>";
+    var getnmark = "<%= nmark  %>";
+    var getQuiztime = "<%= Quiztime  %>";
+
+    var decimalTimeString = getQuiztime;
+    var decimalTime = parseFloat(decimalTimeString);
+    decimalTime = decimalTime * 60 ;
+    var hours = Math.floor((decimalTime / (60 * 60)));
+    decimalTime = decimalTime - (hours * 60 * 60);
+    var minutes = Math.floor((decimalTime / 60));
+    decimalTime = decimalTime - (minutes * 60);
+    var seconds = Math.round(decimalTime);
+    if(hours < 10){hours = "0" + hours;}
+    if(minutes < 10){minutes = "0" + minutes;}
+    if(seconds < 10){seconds = "0" + seconds;}
+    
+    // actualQuiztime = "" + hours + ":" + minutes + ":" + seconds
+    actualQuiztime = "" + hours + ":" + minutes
+
+    function startTest(){
+        document.getElementById("sidebarobjid4form").submit();
+    }
+    
+    function widthchanged(mq){
+        if (mq.matches) {
+    // window width is at least 500px
+        mini = true;
+        toggleSidebar();
+    } else {
+    // window width is less than 500px
+        mini = false;
+        toggleSidebar();
+    } }   
+
+    // var mini = false;
+    const mq = window.matchMedia( "(min-width: 1030px)" ); 
+    var xx=minutes;
+    var yy=seconds;
+
+    var positiveMark = getpmark;
+    var negativeMark = (getnmark != "0" ? "-" : "")+getnmark;
+
+    var time =xx.toString()+":"+yy.toString();
+    var noOfQues=getnumberOfquestions
+
+    widthchanged(mq);
+    mq.addListener(widthchanged);
+
+    function toggleSidebar() {
+        if (mini) {
+            document.getElementById("mySidebar").style.width = "271px";
+            document.getElementById("mySidebar").style.minHeight="600px"
+            document.getElementById("main").style.marginLeft = "271px";
+
+            document.getElementById("sidebarobjid1").innerHTML = "Time: "+time+" Min";
+            document.getElementById("sidebarobjid2").innerHTML = "No. Of Questions: "+noOfQues;
+            document.getElementById("sidebarobjid3").innerHTML = `
+            <label>Marking Scheme</label>
+            <div style="display: flex; height: 35px;">
+                <div style="margin: auto; margin-bottom: 10px; width: 80px; line-height: 25px; background-color: yellowgreen; color: #424242;">+`+positiveMark+`</div>
+                <div style="margin: auto; margin-bottom: 10px; width: 80px; line-height: 25px; background-color: rgb(255, 97, 97); color: #424242;">`+negativeMark+`</div>
+            </div>`;
+            document.getElementById("sidebarobjid4").innerHTML = "Start Test";
+
+            document.getElementById("sidebarobjid1").style.fontSize ="1.35rem";
+
+            document.getElementById("logoid").classList.remove("logo");
+            document.getElementById("logoid").innerHTML ="";
+            document.getElementById("logoidnb").classList.remove("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="Nyble";
+
+            this.mini = false;
+        } else {
+            if(mq.matches){
+                document.getElementById("mySidebar").style.width = "90px";
+                document.getElementById("main").style.marginLeft = "90px";
+            }else{
+                document.getElementById("mySidebar").style.width = "56px";
+                document.getElementById("main").style.marginLeft = "56px";
+                document.getElementById("sidebarobjid1").style.fontSize ="1rem";
+
+                document.getElementById("instructions1").style.fontSize ="1rem";
+                document.getElementById("instructions2").style.fontSize ="1rem";
+            }
+
+            document.getElementById("mySidebar").style.minHeight="420px"
+            
+            document.getElementById("sidebarobjid1").innerHTML = time;
+            document.getElementById("sidebarobjid2").innerHTML = "Q. "+noOfQues;
+            document.getElementById("sidebarobjid3").innerHTML = "M.S";
+            document.getElementById("sidebarobjid4").innerHTML = "St.T";
+
+            document.getElementById("logoid").classList.add("logo");
+            document.getElementById("logoid").innerHTML ="Nyble";
+            document.getElementById("logoidnb").classList.add("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="";
+            this.mini = true;
+        }
+    }
+</script>
+
+</html>

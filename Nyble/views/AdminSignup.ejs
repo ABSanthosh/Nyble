@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Walter Turncoat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Nyble | Admin Sign up</title>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    
+   
+
+</head>
+
+<style>
+    html,body{
+        margin: 0;
+        height: 100%;
+    }
+    body{
+        min-width: 1030px;
+        min-height: 620px;
+        overflow-y: hidden;
+        overflow-x: hidden;         
+
+    }
+    
+    .bodydark{
+        background:
+        linear-gradient(#9163F2, transparent),
+        linear-gradient(217deg, #8480F2, transparent),
+        linear-gradient(127deg, #30A8F2, transparent),
+        linear-gradient(366deg, #32BAD9, transparent),
+        linear-gradient(90deg, #48D9CA, transparent);
+    background-blend-mode: screen;
+    background-repeat: no-repeat;
+    background-size:cover;
+    }
+
+    .logo{
+        font-family: Passero One;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 135px;
+        margin-bottom: 0px;
+        color: #000000;
+        padding:0px;        
+    }
+    .sublogo{
+        font-family: Walter Turncoat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 27px;
+        line-height: 57px;
+        text-transform: capitalize;
+        position: relative;
+        text-align: right;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        top: 10%;
+        color: #000000;
+    } 
+    .logo_box{
+        position: absolute;
+        left: 12%;
+        top: 17%;
+        width: 500px;
+    }
+
+    .darkmode{
+        color: #000000 !important;
+        background-color: #dddddd !important;
+        border-color: #1B1B1B !important;
+    }
+    .lightmode{
+        color: #ffffff !important;
+        background-color: #1B1B1B !important;
+        border-color: #F3F3F3 !important;
+    }
+
+    .buttonhover_light:hover{
+        color: #000000 !important;
+        background-color: #ffffff !important;
+        transition-duration: 200ms;
+    }
+    .buttonhover_dark:hover{
+        color: #ffefef !important;
+        background-color: #000000 !important; 
+        transition-duration: 200ms;
+    }
+
+    .mb-3{
+        top: 50%;
+        width: 250px;
+    }
+    .icon{
+        position: absolute;
+        height: 6%;
+        width: 6%;
+        background-size: cover;
+        right: 15px;
+        top: 15px;
+    }
+
+    .icon#moon{
+        display: inline;
+    }
+    .adminbutton{
+        width: 250px;
+        top:15%;
+    }
+  
+ 
+    .adminloginbox{
+        position: absolute;
+        width: 390px;
+        height: 450px;
+        left: 60%;
+        top: 21%;
+        background: #1B1B1B;
+        border-radius: 39px;
+        display: inline-grid;
+        grid-row: 3;
+        margin-bottom: 40px;
+        display:inline-grid;
+    }
+
+    #mail_id,#admin_password,#confirm_admin_password{
+        position: relative;
+        width: 190px;
+        padding: 10px 20px;        
+        font-family: 'Walter Turncoat';
+        font-size: x-large;
+        display: inline-block;
+        height: 60px;
+        color: #fffbfb;
+        background-color: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #F3F3F3;
+        border-radius: 10px;
+        box-sizing: border-box;    
+    }
+    #inputcont.mb-3{
+        width: 335px;
+        top: 10%;
+    }
+
+    #captcha_box{
+        position: relative;
+        width: 335px;
+        color: #ffffff;
+        background: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #ffffff;        
+        font-family: 'Walter Turncoat';
+        padding: 10px 20px;
+        margin: 8px 0;
+        border-radius: 10px;
+        cursor: pointer;  
+        font-size: 20px;
+    }
+    
+    #backbutton{
+        position: relative;
+        width: 160px;
+        top:15%;
+        color: #ffffff;
+        background: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #ffffff;        
+        font-family: 'Walter Turncoat';
+        padding: 10px 20px;
+        margin: 8px 0;
+        font-size: x-large;
+        margin-right: 7px;
+        border-radius: 10px;
+        cursor: pointer;  
+    }
+
+    .flexb{
+        display: flex;
+         width: 335px;
+    }    
+
+    #create{
+        position: relative;
+        width: 160px;
+        top:15%;
+        color: #ffffff;
+        background: #1B1B1B;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #ffffff;        
+        font-family: 'Walter Turncoat';
+        padding: 10px 20px;
+        margin: 7px 0px 9px 8px;
+        font-size: x-large;
+        border-radius: 10px;
+        cursor: pointer;  
+    }
+    
+    /*Modal styling*/
+  
+
+	.otp_input{
+    	width: 50px;
+		height: 50px;
+		padding: 0;
+		margin-top: 25px;
+		text-align: center;
+		border: 1px solid gray;
+		border-radius: 5px;
+	}
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+    }   
+
+    input[type=number] {
+    -moz-appearance:textfield; 
+    }
+
+    .modal{
+        font-family: Walter Turncoat;
+        font-size: 37px;
+        
+    }
+    #sub{
+        font-size: 20px;
+        bottom: 15px;
+    }
+    .modal-content{
+        background-color: #6D6D6D;
+        color: black;
+        background: linear-gradient(to right bottom, #4c6fe4, #dd7fe0);
+    }
+
+    .modal-header{
+        text-align: center;
+        border-bottom:0px;
+    }
+    .modal_cus_header{
+        position: relative;
+        text-align: center;
+        margin: 0px;
+        width: 100%;
+    }
+    .close{
+        position: absolute;
+        font-size: 35px;
+        float:right;
+        padding: 0px;
+        
+    }
+    .close_thing{
+        float: right;
+    }
+
+     /*CSS queries*/
+
+    /* Small devices (landscape phones, 576px and up)*/
+    @media only screen and (max-width: 1030px) { 
+        .adminloginbox{
+            width: 780px;
+            height: 900px;
+            top: 57%;
+            left: 50%;
+            /* bring your own prefixes */
+            transform: translate(-47%, -40%);
+        }
+        .logo_box{
+            position: fixed;
+            left: 50%;
+            top: 15%;
+            /* bring your own prefixes */
+            transform: translate(-50%, -50%);
+        }
+        .logo{
+            font-size: 220px;
+        }
+        .sublogo{
+            font-size: 50px;
+        }
+        .mb-3{
+            width: 650px !important;
+        }
+        #create,#backbutton{
+            width: 315px;
+            height: 120px;
+            font-size: 65px;
+            border-width: 7px;
+            border-style: solid;
+            border-color:#fffcfc;
+            color: #F3F3F3;
+            margin-top: 15px;
+        }
+
+        #create{
+            margin-left: 5px;
+        }
+        #backbutton{
+            margin-right: 15px;
+        }
+
+        #captcha_box{
+            height: fit-content;
+            font-size: 48px !important;
+            border-width: 7px;
+            border-style: solid;
+            border-color:#fffcfc;
+            color: #F3F3F3;
+            width: 650px !important;
+        }
+        
+
+        #mail_id,#admin_password,#confirm_admin_password{
+            height: 120px;
+            font-size: 45px;
+            padding-left: 40px;
+            border-width: 7px;
+            border-color:#fffcfc;            
+            border-style: solid; 
+        }
+
+        .icon{
+            height: 10%;
+            width: 10%;
+        }
+        .flexb{
+            width: 650px;
+        }
+    }
+
+    /* Medium devices (tablets, 768px and up)*/
+    @media (max-height: 478px) { 
+        .loginbox{top: 800px;}
+        .logo_box{top:200px;}
+
+     }
+    /*CSS Ending*/
+
+</style>
+
+<body id="body">
+    <div class="logo_box" id="logo_box">
+        <h1 class="logo" id="logo">Nyble</h1>
+        <p class="sublogo" id="sublogo">Improvise Adapt Overcome</p>
+    </div>
+
+    <img class="icon" style="display: none;" id="sun" src="../open-iconic/svg/sun.svg" onclick="theme()">  
+    <img class="icon" id="moon" src="../open-iconic/svg/moon.svg" onclick="theme()">
+
+    <form method="POST" action="/random" class="adminloginbox row w-500 mx-auto" id="adminloginbox" >
+        <center>
+          <div class="input-group mb-3" id="inputcont">
+            <input type="email" id="mail_id" class="form-control" name="adminmailid" autocomplete="off" placeholder="Email address " aria-describedby="basic-addon2" >
+          </div>
+
+          <div class="input-group mb-3" id="inputcont">
+            <input type="password" id="admin_password" class="form-control" name="adminpassword" autocomplete="off" placeholder="Password" aria-describedby="basic-addon2" >
+          </div>     
+
+          <div class="input-group mb-3" id="inputcont">
+            <input type="password" id="confirm_admin_password" class="form-control" autocomplete="off" name="confirmadminpassword" placeholder="Confirm Password" aria-describedby="basic-addon2" >
+          </div>    
+        </center>
+        <center>
+            <!-- <div class="input-group newaccount"id="captcha_box">
+                <button type="submit"  class="buttonhover_light">Captcha</button>
+            </div> -->
+
+            <div class="input-group flexb" >
+                <button formaction="/"  type="submit" id="backbutton" class="buttonhover_light">Back</button>        
+                <button formaction="/AdminSignup" type="submit" id="create"class="buttonhover_light">Create</button>
+                <!-- <button formaction="/AdminSignup" type="button" id="create" data-toggle="modal" data-target="#exampleModal" class="buttonhover_light">Create</button> -->
+            </div>
+        </center>
+    </form>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal"  data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <label class="col-12 modal_cus_header">Enter OTP</label>
+            <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="close_thing" aria-hidden="true">&times;</span></button>
+        </div>
+        <center>
+        <div class="modal-body">
+            <form>
+                <input class="otp_input" id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
+                <input class="otp_input" id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
+                <input class="otp_input" id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
+                <input class="otp_input" id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
+            </form>
+        </div>
+        <br>
+        <label id="sub">Did not recive any code?</label>
+        <br>
+        <a href="" id="sub">Send again</a>
+        <br>
+    </center>
+      </div>
+      
+    </div>
+    
+  </div>
+
+
+
+<% var test =alerts; %> 
+</body>
+
+ 
+<script>   
+    var getTest = "<%= test  %>";
+
+    getTest = getTest.replace(`&#34;`,'"')
+    getTest = getTest.replace(`&#34;`,'"')
+    if(getTest !=10){
+        alert(getTest)
+    }
+    
+    function theme(){
+        var elem,style;
+        elem = document.querySelector('#sun');
+        style = getComputedStyle(elem);
+
+        if (style.display =="none"){
+            /*Sun on press-> Light mode*/
+            document.getElementById("moon").style.cssText= "display:none;"
+            document.getElementById("sun").style.cssText= "display:block !important;"
+            document.getElementById("sun").style.cssText= "filter:invert(1);"
+
+            document.getElementById("body").style.cssText = "background-color: #1B1B1B;"
+            document.getElementById("logo").style.cssText = "color:white;"
+            document.getElementById("sublogo").style.cssText = "color:white;"
+
+            document.getElementById("adminloginbox").classList.remove("lightmode")
+            document.getElementById("adminloginbox").classList.add("darkmode")
+
+            document.getElementById("mail_id").classList.remove("lightmode")
+            document.getElementById("mail_id").classList.add("darkmode")
+
+            document.getElementById("admin_password").classList.remove("lightmode")
+            document.getElementById("admin_password").classList.add("darkmode")
+
+            document.getElementById("confirm_admin_password").classList.remove("lightmode")
+            document.getElementById("confirm_admin_password").classList.add("darkmode")
+
+            document.getElementById("create").classList.remove("buttonhover_light")
+            document.getElementById("create").classList.add("buttonhover_dark")
+            document.getElementById("create").classList.remove("lightmode")
+            document.getElementById("create").classList.add("darkmode")
+            
+            document.getElementById("backbutton").classList.remove("buttonhover_light")
+            document.getElementById("backbutton").classList.add("buttonhover_dark")
+            document.getElementById("backbutton").classList.remove("lightmode")
+            document.getElementById("backbutton").classList.add("darkmode")
+            
+            /*d= white, 0 black*/ 
+        }else{
+            /*Moon on press-> Dark mode*/
+            document.getElementById("moon").style.cssText= "display:block;"
+            document.getElementById("sun").style.cssText= "display:none;"
+
+            document.getElementById("body").style.cssText = "background-color: #ffffff;"
+            document.getElementById("logo").style.cssText = "color:black;"
+            document.getElementById("sublogo").style.cssText = "color:black;"
+
+            document.getElementById("adminloginbox").classList.add("lightmode")
+            document.getElementById("adminloginbox").classList.remove("darkmode")
+            
+            document.getElementById("mail_id").classList.add("lightmode")
+            document.getElementById("mail_id").classList.remove("darkmode")
+
+            document.getElementById("admin_password").classList.add("lightmode")
+            document.getElementById("admin_password").classList.remove("darkmode")       
+            
+            document.getElementById("confirm_admin_password").classList.add("lightmode")
+            document.getElementById("confirm_admin_password").classList.remove("darkmode") 
+            
+            document.getElementById("create").classList.add("buttonhover_light")
+            document.getElementById("create").classList.remove("buttonhover_dark")
+            document.getElementById("create").classList.add("lightmode")
+            document.getElementById("create").classList.remove("darkmode")
+
+            document.getElementById("backbutton").classList.add("buttonhover_light")
+            document.getElementById("backbutton").classList.remove("buttonhover_dark")
+            document.getElementById("backbutton").classList.add("lightmode")
+            document.getElementById("backbutton").classList.remove("darkmode")
+        }
+    }
+    
+    // function otp_modal(){
+    //     $('#otpmodal').modal('show')
+    // }
+    // otp_modal()
+    // //Modal
+    function getCodeBoxElement(index) {
+       return document.getElementById('codeBox' + index);
+    }
+    function onKeyUpEvent(index, event) {
+        const eventCode = event.which || event.keyCode;
+        if (getCodeBoxElement(index).value.length === 1) {
+            if (index !== 4) {
+                getCodeBoxElement(index+ 1).focus();
+            } else {
+                getCodeBoxElement(index).blur();
+            }
+        }
+        if (eventCode === 8 && index !== 1) {
+            getCodeBoxElement(index - 1).focus();
+        }
+    }
+    function onFocusEvent(index) {
+        for (item = 1; item < index; item++) {
+            const currentElement = getCodeBoxElement(item);
+            if (!currentElement.value) {
+                currentElement.focus();
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Caveat Brush' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <title>Nyble | Quiz Details</title>
+</head>
+
+<style>
+    body{
+        margin: 0px 0px 0px 0px;
+    }
+    .logo{
+        font-size: 80px;
+        width: 100%;
+        text-align: center;
+        font-family: 'Passero One';
+        color: whitesmoke;
+        margin-bottom: 5px;
+        padding-top: 6px;
+    }
+    .sidebar{
+        position: fixed;
+        background-color: #424242;
+        width: 270px;
+        left: 0px;
+        color: white;
+        top: 0px;
+        height: 100%;
+        
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+    nav ul{
+        list-style: none;
+        padding: 0px;
+        font-family: "caveat brush";
+        font-size: 25px;
+        padding-left: 8px;
+        padding-right: 9px;
+        text-align: center;
+        
+    }
+    .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5{
+        border: 5px solid white;
+        line-height: 60px;
+        margin-bottom: 10px;
+    }
+    .sidebarobj5{
+        height: 60px;
+        display: flex;
+    }
+    .sidebarobj1:hover,.sidebarobj2:hover,.sidebarobj3:hover,.sidebarobj4:hover,.sidebarobj5:hover{
+        background-color: cadetblue;
+        cursor: pointer;
+    }
+    .content{
+        height: 100vh;
+        overflow: hidden;
+    }
+    hr{
+        background-color: white;
+    }  
+    .hr.belowlogo{
+        color: white;
+        border: 2px solid white;
+    }
+    .hr.incontent{
+        background-color: #424242;
+        border: 2px solid #424242;
+    }
+    .contentplacholder{
+        padding-top: 6px;
+        height: 95px;
+    }
+
+    /* Sidebar Styles */
+
+    .logocolor{
+        color: #424242;
+        font-size: 80px;
+        width: 100%;
+        text-align: left;
+        font-family: 'Passero One';
+        margin-bottom: 5px;
+    }
+
+    .sidebar1 {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        background-color: #111;
+        transition: 0.5s;
+        
+        padding-top: 60px;
+        white-space: nowrap;
+    }
+
+    #main .sidebar1 {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+    }
+    #main {
+        margin-left: 271px;
+        transition: margin-left 0.5s;
+        overflow: hidden;
+    }
+  
+    .sidebarIconToggle {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        z-index: 99;
+        height: 22px;
+        margin: auto;
+        width: 25px;
+    }
+    .spinner {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: absolute;
+        height: 4px;
+        width: 25px;
+        background-color: #fff;
+    }
+    .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    .diagonal.part-1 {
+        position: relative;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        float: left;
+    }
+    .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+    input[type="checkbox"]:checked ~ #sidebarMenu {
+        transform: translateX(0);
+    }
+    input[type=checkbox] {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        display: none;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        opacity: 0;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(135deg);
+        margin-top: 8px;
+    }
+    input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(-135deg);
+        margin-top: -9px;
+    }
+    @media only screen and (max-width: 1030px) { 
+        .spinner{
+            height: 4px;
+            width: 20px;
+            padding: 0%;
+        }
+        .sidebarIconToggle {
+            transition: all 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+            z-index: 99;
+            height: 22px;
+            justify-content: center; 
+            align-items: center;
+            width: 22px;
+        }
+
+        .sidebarobj1,.sidebarobj2,.sidebarobj3,.sidebarobj4,.sidebarobj5{
+            border: 3px solid white;
+            font-size: 1.35rem;
+            line-height: 35px;
+            margin-bottom: 10px;
+        }
+
+        .sidebarobj5{
+            height: 35px;
+            display: flex;
+        }   
+        #main{
+            margin-left: 56px;
+        }
+        #mySidebar{
+            width: 56px;
+        }
+    }
+    
+    .mainContent{
+        height: 80vh;
+        overflow: auto;
+        margin-bottom: 30px;
+        bottom: 0px;
+    }
+    .quesPanel{
+        margin: auto;
+        top: 15px;
+        height: 60%;
+        position: relative;
+        border: 4px solid rgb(37, 37, 37);
+        border-radius: 8px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        padding-top: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .question{
+        width: 100%;
+        font-size: 1.3rem;
+        margin-top: 1rem;
+        margin-bottom: 15px;
+        font-family: "Walter Turncoat";
+    }
+    .optionsPanel{
+        width: 100%;
+    }
+    .optionBox{
+        position: relative;
+        width: 50%;
+        font-family: "Walter Turncoat";
+        display: inline-flex;
+        margin-bottom: 15px;
+    }
+    .option{
+        border: 2px solid #4242429c ;
+        left: 0px;
+        padding-left: 10px;
+        font-size: 1.5rem;
+        right: 0px;
+        width: 100%;
+        border-radius: 4px;
+    }
+    #radio{
+        width:3em;
+        height:3em;
+    }
+    input[type=radio]{
+        margin: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    .quesCont{
+        margin: auto;
+        top: 15px;
+        position: relative;
+        border: 3px solid #424242;
+        width: 65%;
+        border-radius: 4px;
+        overflow-y: auto;
+
+        padding-top: 12px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 30px;
+    }
+    .uploadCont{
+        top: 15px;
+        display: flex;
+        margin: auto;
+        border-radius: 10px;
+        border: 2px dashed #424242;
+        width: 67%;
+
+        padding-top: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 5px;
+    }
+    .viewQues{
+        width: 20%;
+        display: flex;
+        margin: auto;
+        margin-top: 15px;
+        border-radius: 10px;
+        border: 2px solid #424242;        
+        text-align: center;
+        font-size: 1.5rem;
+
+        padding-top: 20px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 20px;
+    }
+    .viewQues:hover{
+        background-color: rgb(201, 201, 201);
+        transition: ease-in-out 0.3s;
+        cursor: pointer;
+    }
+    .uploadCont:hover{
+        background-color: rgb(247, 247, 215);
+        transition: ease-in-out 0.5s;
+    }
+    .dragndrop{
+        width: 75%;
+        margin: auto;
+        text-align: center;
+        font-size: 2rem;
+        
+        float: left;
+    }
+    .clicktodrop{
+        background-color: #424242;
+        height: 80px;
+        width: 25%;
+        border-radius: 0px 10px 10px 0px;
+        font-size: 2rem;
+        line-height: 80px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+    .inputgroup{
+        margin: 10px 0px 10px 0px;
+        padding: 20px 0px 0px 0px;
+        text-align: right;
+        width: 100%;
+        font-family: "Amarante";
+        color: #C4C4C4;
+    }
+    .inputgroup input[type="time"]::-webkit-datetime-edit-ampm-field {
+        display: none;
+    }
+    .inputgroup input[type="number"]{width: 100px;}
+    .inputgroup input{
+        text-align: center;
+        border: 0;
+        outline: 0;
+        border-bottom: 2px solid #424242;
+        font-size: 1.5rem;
+    }
+
+    .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    }
+
+    .active, .collapsible:hover {
+    background-color: #555;
+    }
+
+    .collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+    }
+
+    .active:after {
+    content: "\2212";
+    }
+
+    .cocontent {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+    }
+</style>
+
+<body>
+    <div class="wrapper d-flex flex-row bd-highlight mb-3">
+        <div class="Mainsidebar sidebar1">
+            <nav class="sidebar" id="mySidebar">
+                <!-- Burger box -->
+                <div id="logoidnb" class="logo">Nyble</div>
+                <hr class="hr belowlogo">
+                <ul>
+                    <div id="sidebarobjid5" class="sidebarobj5" onclick="toggleSidebar()">
+                        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" onclick="toggleSidebar()">
+                        <label class="sidebarIconToggle">
+                            <div class="spinner diagonal part-1"></div>
+                            <div class="spinner horizontal"></div>
+                            <div class="spinner diagonal part-2"></div>
+                        </label>
+                    </div>
+                    <form id="sidebarobjid2form" method="GET" action="/AdminArchive">
+                        <div onclick="newText()" id="sidebarobjid2" class="sidebarobj2">Archive</div>
+                    </form>
+                </ul>
+            </nav>
+        </div> 
+        <div class="content" id="main">
+            <div id="logoid" class="contentplacholder logocolor"></div>
+            <hr class="hr incontent">
+            <div class="mainContent">
+                <div class="quesCont" id="quesCont" >
+                    <div style="display: none; font-size: 1.5rem; margin-top: 8px; margin-bottom: 4px;" class="tTime" id="tTime">Time:</div>
+                    <div style="display: none; font-size: 1.5rem; margin-top: 4px; margin-bottom: 8px;" class="mMark" id="mMark">Marks:</div>
+                    <button class="collapsible">Quiz Details</button>
+                    <div class="cocontent">
+                        <% data[0].otherDetails.forEach(function(obj){ %>
+                            <p>Date: <%= obj.date %> </p>
+                            <p>Subject: <%= obj.subject %> </p>
+                            <p>Mark: <%= obj.marks %> </p>
+                            <% if(obj.status ==true){ %>
+                                <p>Status: Active </p>
+                            <% }else{ %>
+                                <p>Status: Done </p>
+                            <% } %>
+                            <p>Unique Code: <%= obj.uniqueCode %> </p>
+                            <p>Time Limit: <%= obj.timeLimit %> </p>
+                            <p>Validity</p>
+                            <ul> From: <%= obj.from %> </ul>
+                            <ul> To: <%= obj.to %> </ul>
+                        <% }) %>
+                    </div>
+                    <br>
+                    <button class="collapsible">Questions</button>
+                    <div class="cocontent">
+                        <% var count = 0%>
+                        <% var changer = 'checked=checked',r1='',r2='',r3='',r4='' %>
+                        <% data[0].questions.forEach(function(obj2){ %>
+                            <% count++ %>
+                            <% if(obj2.correctOption == 1){r1=changer; %>
+                            <% }else if(obj2.correctOption == 2){r2=changer; %>
+                            <% }else if(obj2.correctOption == 3){r3=changer; %>
+                            <% }else if(obj2.correctOption == 4){r4=changer;} %>
+                            <div class="quesPanel" id="quesPanel">
+                                <div class="question"><%=count%>) <%= obj2.question %></div>
+                                <div class="optionsPanel">
+                                    <div class="optionBox">
+                                        <input type="radio" class="rOne" id="radio" name="Answer<%=count%>" <%= r1 %> disabled >
+                                        <div class="option"><%= obj2.options[0].option1 %></div>
+                                    </div>
+                                    <div class="optionBox">
+                                        <input type="radio" class="rTwo" id="radio" name="Answer<%=count%>" <%= r2 %> disabled>
+                                        <div class="option"><%= obj2.options[0].option2 %></div>
+                                    </div>
+                                    <div class="optionBox">
+                                        <input type="radio" class="rThree" id="radio" name="Answer<%=count%>" <%= r3 %> disabled>
+                                        <div class="option"><%= obj2.options[0].option3 %></div>
+                                    </div>
+                                    <div class="optionBox">
+                                        <input type="radio" class="rFour" id="radio" name="Answer<%=count%>" <%= r4 %> disabled>
+                                        <div class="option"><%= obj2.options[0].option4 %></div>
+                                    </div>
+                                </div>    
+                                <div class="inputgroup">
+                                    <div class="Ttime" style="font-size: 1.5rem; color: dimgrey;" type="number" placeholder="Marks">+<%= obj2.mark[0].pMarks %>: Positive Marks</div>
+                                    <div class="Ttime" style="font-size: 1.5rem; color: dimgrey;" type="number" placeholder="Marks">-<%= obj2.mark[0].nMarks %>: Negative Marks</div>
+                                </div>       
+                            </div>
+                            <% r1='',r2='',r3='',r4='' %>    
+                        <% }) %>
+                    </div>
+                    <br>
+                    <button class="collapsible">Responses</button>
+                    <div class="cocontent">
+                        <%var len =  data[0].attendees.length-1 %>
+                        <%var llen =  0 %>
+                        <% data[0].attendees.forEach(function(obj3){  %>
+                            <p>Email: <%= obj3.attendeeEmail %></p>
+                            <p>Marks Obtained: <%= obj3.tmarks %></p>
+                            
+                            <% if(llen != len){ %>
+                                <br>
+                                <hr>
+                                <br>
+                            <% }else{%>
+                                <br>
+                            <% } %>
+                            <% llen++ %>
+                        <%  }) %>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div> 
+    <% var Data = data; %>
+</body>
+
+<script>
+    
+    
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+        content.style.maxHeight = null;
+        } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        } 
+    });
+    }
+    
+    function dashboard(){
+        document.getElementById("sidebarobjid1form").submit();
+    }
+    function newText(){
+        document.getElementById("sidebarobjid2form").submit();
+    }
+    function settings(){
+        document.getElementById("sidebarobjid3form").submit();
+    }
+    
+
+    function widthchanged(mq){
+        if (mq.matches) {
+            mini = true;
+            toggleSidebar();
+        } else {
+            mini = false;
+            toggleSidebar();
+        } 
+    }  
+
+    // var mini = false;
+    const mq = window.matchMedia( "(min-width: 1030px)" ); 
+
+    widthchanged(mq);
+    mq.addListener(widthchanged);
+    function toggleSidebar() {
+        if (mini) {
+            document.getElementById("mySidebar").style.width = "271px";
+            document.getElementById("main").style.marginLeft = "271px";
+
+            document.getElementById("sidebarobjid2").innerHTML = "Archive";
+
+            document.getElementById("logoid").classList.remove("logo");
+            document.getElementById("logoid").innerHTML ="";
+            document.getElementById("logoidnb").classList.remove("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="Nyble";
+
+            this.mini = false;
+        } else {
+            if(mq.matches){
+                document.getElementById("mySidebar").style.width = "90px";
+                document.getElementById("main").style.marginLeft = "90px";
+            }else{
+                document.getElementById("mySidebar").style.width = "56px";
+                document.getElementById("main").style.marginLeft = "56px";
+            }
+            document.getElementById("sidebarobjid2").innerHTML = "Arc.";
+
+            document.getElementById("logoid").classList.add("logo");
+            document.getElementById("logoid").innerHTML ="Nyble";
+            document.getElementById("logoidnb").classList.add("contentplacholder");
+            document.getElementById("logoidnb").innerHTML ="";
+            this.mini = true;
+        }
+    }
+</script>
+
+</html>
